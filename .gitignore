@@ -1,0 +1,7 @@
+*.tar
+*.tgz
+dist/
+node_modules/
+lau/
+lua/
+.vscode/
