@@ -1328,6 +1328,8 @@ var compiler = {
               } else {
                 memExp = b.indexExpression(base, next);
               }
+            } else if (next.type == "CallExpression") {
+              memExp = b.memberExpression(memExp, ":", next);
             } else {
               memExp = b.indexExpression(base, next);
             }
@@ -1339,6 +1341,8 @@ var compiler = {
               } else {
                 memExp = b.indexExpression(memExp, next);
               }
+            } else if (next.type == "CallExpression") {
+              memExp = b.memberExpression(memExp, ":", next);
             } else {
               memExp = b.indexExpression(memExp, next);
             }

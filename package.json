@@ -33,7 +33,7 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --compilers js:babel-core/register",
-    "start": "node index.js",
+    "start": "node index.js watch ./lau ./lua",
     "build": "./node_modules/.bin/babel src --out-dir dist"
   },
   "files": [

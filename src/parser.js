@@ -1510,12 +1510,18 @@ function parsePrefixExpression() {
           identifier = parseIdentifier();
           base = finishNode(b.safeMemberExpression(base, '.', identifier));
           break;
+        case '?:':
+          pushLocation(marker);
+          next();
+          expression = parseExpectedExpression();
+          base = finishNode(b.safeMemberExpression(base, ".", expression));
+          break;
         case '?[':
           pushLocation(marker);
           next();
           expression = parseExpectedExpression();
           base = finishNode(b.safeMemberExpression(base, ".", expression));
-          expect("]")
+          expect("]");
           break;
         case '.':
           pushLocation(marker);
@@ -1614,7 +1620,7 @@ function parsePrimaryExpression() {
 
     if (type == StringLiteral) {
       if (tok.isTemplate) {
-        var regexTemplate = /\$\{[\x00-\x7F]+\}/g
+        var regexTemplate = /\$\{[a-zA-Z0-9_.()"']+\}/g
         var match;
         var innerRaw = raw.slice(1, raw.length - 1);
 

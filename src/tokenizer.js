@@ -190,6 +190,11 @@ function lex() {
   // Skip comments beginning with --
   while ((45 === input.charCodeAt(index) &&
         45 === input.charCodeAt(index + 1))) {
+          /*
+    let comment = scanComment();
+    if (comment)
+          return comment
+          */
     scanComment();
     skipWhiteSpace();
   }
@@ -230,6 +235,7 @@ function lex() {
   case 63: // ?
     if (46 === next) return scanPunctuator("?.");
     if (91 === next) return scanPunctuator("?[");
+    if (58 === next) return scanPunctuator("?:");
 
   case 61: // =
     if (61 === next) return scanPunctuator("==");
@@ -692,7 +698,20 @@ function scanComment() {
   }
 
   if (options.comments) {
-    // tokens.push(new Token());
+    /*
+    return new Token(
+      "Comment",
+      content,
+      tokenStart,
+      index,
+      new SourceLocation(
+        lineStart,
+        tokenStart - lineStartIndex,
+        line,
+        index - lineIndex
+      )
+    );
+    */
   }
 }
 
