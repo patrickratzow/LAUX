@@ -1320,34 +1320,21 @@ var compiler = {
         for (let i = 0; i < bases.length - 1; i++) {
           const base = bases[i];
           const next = bases[i + 1];
+          const exp = !memExp ? base : memExp;
 
-          if (!memExp) {
-            if (next.type == "Identifier") {
-              if (next.isLocal == undefined) {
-                memExp = b.memberExpression(base, ".", next);
-              } else {
-                memExp = b.indexExpression(base, next);
-              }
-            } else if (next.type == "CallExpression") {
-              memExp = b.memberExpression(memExp, ":", next);
+          if (next.type == "Identifier") {
+            if (next.isLocal == undefined) {
+              memExp = b.memberExpression(exp, ".", next);
             } else {
-              memExp = b.indexExpression(base, next);
+              memExp = b.indexExpression(exp, next);
             }
-          }
-          else {
-            if (next.type == "Identifier") {
-              if (next.isLocal == undefined) {
-                memExp = b.memberExpression(memExp, ".", next);
-              } else {
-                memExp = b.indexExpression(memExp, next);
-              }
-            } else if (next.type == "CallExpression") {
-              memExp = b.memberExpression(memExp, ":", next);
-            } else {
-              memExp = b.indexExpression(memExp, next);
-            }
+          } else if (next.type == "CallExpression") {
+            memExp = b.memberExpression(exp, ":", next);
+          } else {
+            memExp = b.indexExpression(exp, next);
           }
         }
+
 
         var logicalExp = b.binaryExpression("and", node.base, memExp);
         logicalExp.inParens = true;
