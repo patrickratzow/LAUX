@@ -1335,7 +1335,6 @@ var compiler = {
           }
         }
 
-
         var logicalExp = b.binaryExpression("and", node.base, memExp);
         logicalExp.inParens = true;
 

@@ -1620,7 +1620,7 @@ function parsePrimaryExpression() {
 
     if (type == StringLiteral) {
       if (tok.isTemplate) {
-        var regexTemplate = /\$\{[a-zA-Z0-9_.()"']+\}/g
+        var regexTemplate = /\$\{[a-zA-Z0-9_.():"']+\}/g
         var match;
         var innerRaw = raw.slice(1, raw.length - 1);
 

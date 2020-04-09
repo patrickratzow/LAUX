@@ -388,10 +388,16 @@ export default class CodeGenerator {
 
       this.token(")")
 
-      if (node.body.length) {
-        this.newline();
+      const len = node.body.length
+      if (len) {
+        if (len <= 1)
+          this.space()
 
-        this.printSequence(node.body, { indent: true });
+        this.printSequence(node.body, { indent: len >= 1 });
+
+        if (len <= 1)
+          this.space()
+
       }
 
       this.word("end");
@@ -404,11 +410,23 @@ export default class CodeGenerator {
       this.token("{");
 
       if (node.fields.length) {
-        this.newline();
-        this.printSequence(node.fields, { indent: true, separator: commaSeparator });
-      }
-      else {
-        //this.space();
+        const len = node.fields.length
+
+        this.space();
+
+        if (len > 1) 
+          this.newline() 
+
+        this.printSequence(node.fields, { 
+          indent: len > 1, 
+          separator: commaSeparator, 
+          indentEveryJoin: true
+        });
+
+        this.space();
+
+        if (len > 1)
+          this.newline();
       }
 
       this.token("}");
@@ -527,6 +545,7 @@ export default class CodeGenerator {
 
       if (opts.statement) this._printNewline(true, node, newlineOpts);
 
+      if (opts.indentEveryJoin) this.newline();
       this.print(node);
 
       if (opts.separator && i < nodes.length - 1) {
