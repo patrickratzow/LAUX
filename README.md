@@ -1,5 +1,5 @@
 # LAUX compiler
-This is a fork of LAU made by Metamist. A big thanks to Metamist for this, as a huge majority of the code is his.
+This is a fork of LAU made by Metamist. A few changes in syntax & stuff have been made, but the code is practically all his.
 
 # What is LAUX?
 LAUX is a superset of Lua, adding syntax sugar on top of Lua. It does however still work with vanilla Lua.
