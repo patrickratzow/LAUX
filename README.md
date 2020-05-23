@@ -118,6 +118,16 @@ local b = { 1, ...a, 4 }
 PrintTable(b) -- { 1, 2, 3, 4 }
 ```
 
+## Deconstructing
+Same as in JavaScript.
+
+```lua
+local tbl = { a = 5, b = 3 }
+local { a, b } = tbl -- local a, b = tbl.a, tbl.b
+print(a) -- 5
+print(b) -- 3
+```
+
 ## For of statement
 You can do a generic for loop, which is the equivalent of doing 
 ```lua
