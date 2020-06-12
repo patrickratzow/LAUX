@@ -33,6 +33,37 @@ Foo.Bar = () -> print(self) end -- Foo.Bar = function(self) print(self) end
 ```
 Thin arrow is essentially just a fat arrow, but it automatically adds self, just like : adds self automatically in contrast to . in default Lua.
 
+## Types
+**This is real time type checking, so don't run it in something that gets run A TON, like every frame**
+*Currently doens't work with arrow functions, fixing later*
+
+```lua
+function Foo(bar: string)
+  -- do nothing
+end
+```
+Outputs to
+```lua
+function Foo(bar)
+  local __lau_type = (istable(bar) and bar.__type and bar:__type()) or type(bar)
+  assert(__lau_type == "string", "Expected parameter `bar` to be type `string` instead of `" .. __lau_type .. "`")
+end
+```
+
+This also accepts multiple types by using the | (pipe) character
+```lua
+function Foo(bar: string|MyAddon.Bar)
+  -- do nothing
+end
+```
+Outputs to
+```lua
+function Foo(bar)
+  local __lau_type = (istable(bar) and bar.__type and bar:__type()) or type(bar)
+  assert(__lau_type == "string" or __lau_type == "MyAddon.Bar", "Expected parameter `bar` to be type `string|MyAddon.Bar` instead of `" .. __lau_type .. "`")
+end
+```
+
 ## Mutations
 LAUX adds mutations. Those are just simple shortcuts
 
@@ -71,12 +102,18 @@ class Foo
   -- We can also non static attributes
   name = "Bar"
 
-  constructor(foobar)
+  constructor(foobar: string)
     self.foobar = foobar
   end
 
-  setFoobar(val) self.foobar = val end
+  setFoobar(val: string) self.foobar = val end
   getFoobar() return self.foobar end
+
+  -- If we are not using a public class we need to add __type() function.
+  -- This is to avoid overlapping names for type checking
+  __type()
+    return "MyAddon.Foo"
+  end
 end
 
 -- Don't need new keyword.
@@ -100,8 +137,9 @@ end
 ```
 Classes by default are private, so we can make it public by using the public keyword
 ```lua
-public class XeninUI.Items.Health extends XeninShop.Item
-
+public class XeninShop.Items.Health extends XeninShop.Item
+  -- Since this is a public class you don't need a type
+  -- __type will automatically return the name of the class
 end
 ```
 

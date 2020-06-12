@@ -1022,6 +1022,113 @@ var compileExpression = function(expression) {
 
 function compileFunctionStatement(statement) {
   var body = debugWrapScope(statement, compileStatementList(statement.body));
+
+  var typeChecks = []
+  _.each(statement.parameters, (param => {
+    if (param.typeCheck) {
+      let name = ""
+      function constructName(obj, separator = "", postFix = "") {
+        if (obj.type == "Identifier") {
+          name += `${separator}${obj.name}${postFix}`
+
+          return
+        } else if (obj.type == "BinaryExpression") {
+          if (name == "") {
+            constructName(obj.left)
+          } 
+
+          constructName(obj.right, "|")
+        } else if (obj.type == "MemberExpression") {
+          constructName(obj.base, `${name == "" ? "" : "|"}`)
+
+          constructName(obj.identifier, ".", "")
+        }
+      }
+      constructName(param.typeCheck)
+
+      const types = name.split("|")
+      const typeName = `__lau_type`
+      const andExpression = b.logicalExpression(
+        "and",
+        b.logicalExpression(
+          "and",
+          b.callExpression(b.identifier("istable"), [
+            b.identifier(param.name)
+          ]),
+          b.memberExpression(
+            b.identifier(param.name),
+            ".",
+            b.identifier("__type")
+          ),
+        ),
+        b.callStatement(
+          b.callExpression(
+            b.memberExpression(
+              b.identifier(param.name),
+              ":",
+              b.identifier("__type")
+            )
+          )
+        )
+      )
+      andExpression.inParens = true
+
+      const type = name
+      const typeVar =  b.localStatement(
+        [b.identifier(typeName)], 
+        [
+          b.logicalExpression(
+            "or",
+            andExpression,
+            b.callStatement(
+              b.callExpression(
+                b.identifier("type"),
+                [b.identifier(param.name)]
+              )
+            )
+          )
+        ]
+      )
+
+
+      let compareParam  = b.logicalExpression(
+        "==", 
+        b.identifier(typeName),
+        b.stringLiteral(types[0], `"${types[0]}"`)
+      )
+      for (let i = 1; i < types.length; i++) {
+        compareParam = b.logicalExpression(
+          "or",
+          compareParam,
+          b.logicalExpression(
+            "==", 
+            b.identifier(typeName),
+            b.stringLiteral(types[i], `"${types[i]}"`)
+          )
+        )
+      }
+
+      const assertFailMsg = `Expected parameter \`${param.name}\` to be type \`${name}\``
+      let call = b.callStatement(
+        b.callExpression(
+          b.identifier("assert"),
+          [
+            compareParam,
+            b.stringLiteral(
+              assertFailMsg, `"${assertFailMsg} instead of \`" .. ${typeName} .. "\`"`)
+          ]
+        )
+      )
+
+      typeChecks.push(typeVar)
+      typeChecks.push(call)
+    }
+  }))
+
+  if (typeChecks.length) {
+    node.body.unshift.apply(node.body, typeChecks);
+  }
+
   var defaultValues = [];
 
   var parameters = _.map(statement.parameters, (param) => {
@@ -1046,13 +1153,6 @@ function compileFunctionStatement(statement) {
   if (defaultValues.length) {
     body = defaultValues.concat(body);
   }
-
-  var typeChecks = []
-  var checks = _.map(statement.parameters, (param => {
-    if (param.typeCheck) {
-      console.log("here", param)
-    }
-  }))
 
   return attachLocations(
     statement,
