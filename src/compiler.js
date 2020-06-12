@@ -1237,9 +1237,9 @@ var compiler = {
         _.each(node.parameters, (param => {
           if (param.typeCheck) {
             let name = ""
-            function constructName(obj, separator = "") {
+            function constructName(obj, separator = "", postFix = "") {
               if (obj.type == "Identifier") {
-                name += `${separator}${obj.name}`
+                name += `${separator}${obj.name}${postFix}`
 
                 return
               } else if (obj.type == "BinaryExpression") {
@@ -1248,12 +1248,16 @@ var compiler = {
                 } 
 
                 constructName(obj.right, "|")
+              } else if (obj.type == "MemberExpression") {
+                constructName(obj.base, `${name == "" ? "" : "|"}`)
+
+                constructName(obj.identifier, ".", "")
               }
             }
             constructName(param.typeCheck)
 
             const types = name.split("|")
-
+            
             const typeName = `__lau_type`
             const andExpression = b.logicalExpression(
               "and",
@@ -1272,7 +1276,7 @@ var compiler = {
                 b.callExpression(
                   b.memberExpression(
                     b.identifier(param.name),
-                    ".",
+                    ":",
                     b.identifier("__type")
                   )
                 )
