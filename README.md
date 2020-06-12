@@ -4,6 +4,18 @@ This is a fork of LAU made by Metamist. A few changes in syntax & stuff have bee
 # What is LAUX?
 LAUX is a superset of Lua, adding syntax sugar on top of Lua. It does however still work with vanilla Lua.
 
+# How to use
+```cmd
+cd node-path
+npm install
+node index.js watch "addon_path\laux" "addon_path\lua"
+```
+
+Example of transpiling
+```cmd
+node index.js watch "C:\Ratzow\Gmod\Server - DarkRP\garrysmod\addons\xeninui\laux" "C:\Ratzow\Gmod\Server - DarkRP\garrysmod\addons\xeninui\lua"
+```
+
 # What does it add?
 
 ## Functions
