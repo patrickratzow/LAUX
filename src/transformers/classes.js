@@ -71,6 +71,29 @@ export default class ClassTransformer {
     var body = this.body;
 
     var strName = node.identifier.name;
+    if (strName == undefined) {
+      strName = ""
+
+      function constructName(obj, separator = "", postFix = "") {
+        if (obj.type == "Identifier") {
+          strName += `${separator}${obj.name}${postFix}`
+
+          return
+        } else if (obj.type == "BinaryExpression") {
+          if (strName == "") {
+            constructName(obj.left)
+          } 
+
+          constructName(obj.right, "|")
+        } else if (obj.type == "MemberExpression") {
+          constructName(obj.base, `${strName == "" ? "" : "|"}`)
+
+          constructName(obj.identifier, ".", "")
+        }
+      }
+
+      constructName(node.identifier)
+    }
 
     const constructorBody = this.constructorBody = [];
     this.constructor = this.buildConstructor();
@@ -88,12 +111,10 @@ export default class ClassTransformer {
 
     var doBody = [];
     var baseTableKeys = [
-      /*
       b.tableKeyString(
         b.identifier("__name"),
         b.stringLiteral(strName, `"${strName}"`)
       )
-      */
     ];
 
     doBody.push(b.localStatement([ idClass0 ], []));
@@ -311,6 +332,7 @@ export default class ClassTransformer {
 
   pushBody() {
     const classBodyPaths = this.path.get("body");
+    let typeMethod
     for (const path of classBodyPaths) {
       const node = path.node;
 
@@ -344,9 +366,17 @@ export default class ClassTransformer {
           this.pushConstructor(replaceSupers, node, path);
         }
         else {
+          if (path.node.identifier.name == "__type") {
+            typeMethod = path
+          }
+
           this.pushMethod(node, path);
         }
       }
+    }
+
+    if (!typeMethod) {
+      throw new Error("You need to add a __type")
     }
   }
 
