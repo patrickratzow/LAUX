@@ -1257,7 +1257,6 @@ var compiler = {
             constructName(param.typeCheck)
 
             const types = name.split("|")
-            
             const typeName = `__lau_type`
             const andExpression = b.logicalExpression(
               "and",

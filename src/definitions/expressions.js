@@ -1,6 +1,6 @@
 import defineType from "./index";
 
-defineType("LogicalExpr   n", {
+defineType("LogicalExpression", {
   visitors: [ "left", "right" ],
   builder: [ "operator", "left", "right" ],
   aliases: [ "Expression" ]
