@@ -1338,8 +1338,8 @@ function parseSubExpression(minPrecedence) {
     // Push in the marker created before the loop to wrap its entirety.
     if (trackLocations) locations.push(marker);
     expression = finishNode(b.binaryExpression(operator, expression, right));
-
   }
+
   return expression;
 }
 
@@ -1669,6 +1669,7 @@ function parsePrimaryExpression() {
         return finishNode(b.spreadExpression(exp))
     }
 
+
     return finishNode(b.literal(type, value, raw));
   } else if (Keyword === type && 'function' === value) {
     pushLocation(marker);
@@ -1680,6 +1681,7 @@ function parsePrimaryExpression() {
     return parseTableConstructor();
   }
   else if (token.value == '(') {
+    
   }
 }
 

@@ -1236,8 +1236,25 @@ var compiler = {
         var typeChecks = []
         _.each(node.parameters, (param => {
           if (param.typeCheck) {
-            const typeName = `__lau_type`
+            let name = ""
+            function constructName(obj, separator = "") {
+              if (obj.type == "Identifier") {
+                name += `${separator}${obj.name}`
 
+                return
+              } else if (obj.type == "BinaryExpression") {
+                if (name == "") {
+                  constructName(obj.left)
+                } 
+
+                constructName(obj.right, "|")
+              }
+            }
+            constructName(param.typeCheck)
+
+            const types = name.split("|")
+
+            const typeName = `__lau_type`
             const andExpression = b.logicalExpression(
               "and",
               b.logicalExpression(
@@ -1263,7 +1280,7 @@ var compiler = {
             )
             andExpression.inParens = true
 
-            const type = param.typeCheck.name
+            const type = name
             const typeVar =  b.localStatement(
               [b.identifier(typeName)], 
               [
@@ -1280,16 +1297,30 @@ var compiler = {
               ]
             )
   
-            const assertFailMsg = `Expected parameter \`${param.name}\` to be type \`${param.typeCheck.name}\``
+
+            let compareParam  = b.logicalExpression(
+              "==", 
+              b.identifier(typeName),
+              b.stringLiteral(types[0], `"${types[0]}"`)
+            )
+            for (let i = 1; i < types.length; i++) {
+              compareParam = b.logicalExpression(
+                "or",
+                compareParam,
+                b.logicalExpression(
+                  "==", 
+                  b.identifier(typeName),
+                  b.stringLiteral(types[i], `"${types[i]}"`)
+                )
+              )
+            }
+
+            const assertFailMsg = `Expected parameter \`${param.name}\` to be type \`${name}\``
             let call = b.callStatement(
               b.callExpression(
                 b.identifier("assert"),
                 [
-                  b.logicalExpression(
-                    "==", 
-                    b.identifier(typeName),
-                    b.stringLiteral(param.typeCheck.name, `"${param.typeCheck.name}"`)
-                  ),
+                  compareParam,
                   b.stringLiteral(
                     assertFailMsg, `"${assertFailMsg} instead of \`" .. ${typeName} .. "\`"`)
                 ]
