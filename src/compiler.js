@@ -1238,35 +1238,38 @@ var compiler = {
           if (param.typeCheck) {
             const typeName = `__lau_type`
 
-            let type = param.typeCheck.name
-            let typeVar =  b.localStatement(
+            const andExpression = b.logicalExpression(
+              "and",
+              b.logicalExpression(
+                "and",
+                b.callExpression(b.identifier("istable"), [
+                  b.identifier(param.name)
+                ]),
+                b.memberExpression(
+                  b.identifier(param.name),
+                  ".",
+                  b.identifier("__type")
+                ),
+              ),
+              b.callStatement(
+                b.callExpression(
+                  b.memberExpression(
+                    b.identifier(param.name),
+                    ".",
+                    b.identifier("__type")
+                  )
+                )
+              )
+            )
+            andExpression.inParens = true
+
+            const type = param.typeCheck.name
+            const typeVar =  b.localStatement(
               [b.identifier(typeName)], 
               [
                 b.logicalExpression(
                   "or",
-                  b.logicalExpression(
-                    "and",
-                    b.logicalExpression(
-                      "and",
-                      b.callExpression(b.identifier("istable"), [
-                        b.identifier(param.name)
-                      ]),
-                      b.memberExpression(
-                        b.identifier(param.name),
-                        ".",
-                        b.identifier("__type")
-                      ),
-                    ),
-                    b.callStatement(
-                      b.callExpression(
-                        b.memberExpression(
-                          b.identifier(param.name),
-                          ".",
-                          b.identifier("__type")
-                        )
-                      )
-                    )
-                  ),
+                  andExpression,
                   b.callStatement(
                     b.callExpression(
                       b.identifier("type"),
