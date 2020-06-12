@@ -1290,7 +1290,8 @@ var compiler = {
                     b.identifier(typeName),
                     b.stringLiteral(param.typeCheck.name, `"${param.typeCheck.name}"`)
                   ),
-                  b.stringLiteral(assertFailMsg, `"${assertFailMsg}"`)
+                  b.stringLiteral(
+                    assertFailMsg, `"${assertFailMsg} instead of \`" .. ${typeName} .. "\`"`)
                 ]
               )
             )
