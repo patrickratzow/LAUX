@@ -1,5 +1,5 @@
 # LAUX compiler
-This is a fork of LAU made by Metamist. A big thanks to Metamist for this, as a huge majority of the code is his.
+This is a fork of LAU made by Metamist. A few changes in syntax & stuff have been made, but the code is practically all his.
 
 # What is LAUX?
 LAUX is a superset of Lua, adding syntax sugar on top of Lua. It does however still work with vanilla Lua.
@@ -116,6 +116,16 @@ This is the same operator found in JavaScript. It functions like table.concat/un
 local a = { 2, 3 }
 local b = { 1, ...a, 4 }
 PrintTable(b) -- { 1, 2, 3, 4 }
+```
+
+## Deconstructing
+Same as in JavaScript.
+
+```lua
+local tbl = { a = 5, b = 3 }
+local { a, b } = tbl -- local a, b = tbl.a, tbl.b
+print(a) -- 5
+print(b) -- 3
 ```
 
 ## For of statement
