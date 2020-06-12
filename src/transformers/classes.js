@@ -48,6 +48,7 @@ export default class ClassTransformer {
     this.node = path.node;
     this.path = path;
     this.state = state;
+    this.name = undefined;
 
     this.staticMembers = [];
     this.members = [];
@@ -94,6 +95,7 @@ export default class ClassTransformer {
 
       constructName(node.identifier)
     }
+    this.name = strName
 
     const constructorBody = this.constructorBody = [];
     this.constructor = this.buildConstructor();
@@ -376,7 +378,18 @@ export default class ClassTransformer {
     }
 
     if (!typeMethod) {
-      throw new Error("You need to add a __type")
+      this.methods.push(
+        b.tableKeyString(
+          b.identifier("__type"),
+          b.functionExpression([b.selfExpression()], true, [
+            b.returnStatement(
+              [
+                b.memberExpression(b.selfExpression(), ".", b.identifier("__name"))
+              ]
+            )
+          ])
+        )
+      )
     }
   }
 
