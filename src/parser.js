@@ -828,6 +828,11 @@ function parseClassMethodStatement(expression, isStatic, isConstructor) {
 
           parameter.defaultValue = exp;
         }
+        if (consume(':')) {
+          var exp = parseExpectedExpression();
+
+          parameter.typeCheck = exp;
+        }
 
         parameters.push(parameter);
 
@@ -1078,6 +1083,11 @@ function parseFunctionDeclaration(name, isLocal, isExpression) {
           var exp = parseExpectedExpression();
 
           parameter.defaultValue = exp;
+        }
+        if (consume(':')) {
+          var exp = parseExpectedExpression();
+
+          parameter.typeCheck = exp;
         }
 
         parameters.push(parameter);
@@ -1441,6 +1451,11 @@ function parsePrefixExpression() {
             if (consume('=')) {
                 var exp = parseExpectedExpression();
                 parameter.defaultValue = exp;
+            }
+            if (consume(':')) {
+              var exp = parseExpectedExpression();
+    
+              parameter.typeCheck = exp;
             }
 
             parameters.push(parameter);

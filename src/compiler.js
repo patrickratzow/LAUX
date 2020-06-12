@@ -1047,6 +1047,13 @@ function compileFunctionStatement(statement) {
     body = defaultValues.concat(body);
   }
 
+  var typeChecks = []
+  var checks = _.map(statement.parameters, (param => {
+    if (param.typeCheck) {
+      console.log("here", param)
+    }
+  }))
+
   return attachLocations(
     statement,
     b.functionDeclaration(
@@ -1226,6 +1233,73 @@ var compiler = {
       "FunctionDeclaration|FunctionExpression|FatArrowExpression|ThinArrowExpression"(path) {
         const node = path.node;
 
+        var typeChecks = []
+        _.each(node.parameters, (param => {
+          if (param.typeCheck) {
+            const typeName = `__lau_type`
+
+            let type = param.typeCheck.name
+            let typeVar =  b.localStatement(
+              [b.identifier(typeName)], 
+              [
+                b.logicalExpression(
+                  "or",
+                  b.logicalExpression(
+                    "and",
+                    b.logicalExpression(
+                      "and",
+                      b.callExpression(b.identifier("istable"), [
+                        b.identifier(param.name)
+                      ]),
+                      b.memberExpression(
+                        b.identifier(param.name),
+                        ".",
+                        b.identifier("__type")
+                      ),
+                    ),
+                    b.callStatement(
+                      b.callExpression(
+                        b.memberExpression(
+                          b.identifier(param.name),
+                          ".",
+                          b.identifier("__type")
+                        )
+                      )
+                    )
+                  ),
+                  b.callStatement(
+                    b.callExpression(
+                      b.identifier("type"),
+                      [b.identifier(param.name)]
+                    )
+                  )
+                )
+              ]
+            )
+  
+            const assertFailMsg = `Expected parameter \`${param.name}\` to be type \`${param.typeCheck.name}\``
+            let call = b.callStatement(
+              b.callExpression(
+                b.identifier("assert"),
+                [
+                  b.logicalExpression(
+                    "==", 
+                    b.identifier(typeName),
+                    b.stringLiteral(param.typeCheck.name, `"${param.typeCheck.name}"`)
+                  ),
+                  b.stringLiteral(assertFailMsg, `"${assertFailMsg}"`)
+                ]
+              )
+            )
+
+            typeChecks.push(typeVar)
+            typeChecks.push(call)
+          }
+        }))
+
+        if (typeChecks.length) {
+          node.body.unshift.apply(node.body, typeChecks);
+        }
         var defaultValues = [];
 
         _.each(node.parameters, (param) => {
