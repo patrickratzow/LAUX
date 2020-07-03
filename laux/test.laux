@@ -1,4 +1,4 @@
 public class Test
-    setPrice(price) = self.price = price end
-    getPrice() return self.price end
+    price = 5
+    _get _set price
 end

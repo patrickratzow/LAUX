@@ -552,13 +552,15 @@ export default class ClassTransformer {
       ))
     }
     if (node.isSet) {
+      const idParam = b.identifier(rawName)
+
       var test = b.tableKeyString(
         b.identifier(`set${name}`),
-        b.functionExpression([ b.identifier("var") ], true, [
+        b.functionExpression([ idParam ], true, [
           b.assignmentStatement([
             b.memberExpression(b.selfExpression(), ".", b.identifier(rawName))
           ], [
-            b.identifier("var")
+            idParam
           ]),
           b.returnStatement([
             b.selfExpression()
