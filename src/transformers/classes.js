@@ -57,6 +57,9 @@ export default class ClassTransformer {
     this.userMethods = [];
     this.userMembers = [];
 
+    this.getters = [];
+    this.setters = [];
+
     this.body = [];
 
     this.classRef = this.node.identifier;
@@ -130,6 +133,15 @@ export default class ClassTransformer {
     }
 
     this.buildBody();
+
+    
+    for (const method of this.setters) {
+      baseTableKeys.push(method);
+    }
+    
+    for (const method of this.getters) {
+      baseTableKeys.push(method);
+    }
 
     for (const method of this.methods) {
       baseTableKeys.push(method);
@@ -314,7 +326,6 @@ export default class ClassTransformer {
   buildBody() {
     this.pushBody();
     this.verifyConstructor();
-
   }
 
   buildConstructor() {
@@ -340,6 +351,10 @@ export default class ClassTransformer {
 
       if (path.isClassMemberStatement()) {
         this.pushMember(node, path);
+      }
+
+      if (path.isClassGetSetStatement()) {
+        this.pushGetSet(node, path);
       }
 
       if (path.isClassMethodStatement()) {
@@ -515,6 +530,43 @@ export default class ClassTransformer {
         node.identifier,
         exp
       ));
+    }
+  }
+
+  pushGetSet(node, path) {
+    const rawName = node.identifier.name
+    const name = rawName.charAt(0).toUpperCase() + rawName.slice(1)
+
+    if (node.isGet) {
+      this.getters.push(b.tableKeyString(
+        b.identifier(`get${name}`),
+        b.functionExpression([], true, [
+          b.returnStatement([
+            b.memberExpression(
+              b.selfExpression(),
+              ".",
+              b.identifier(rawName)
+            )
+          ])
+        ])
+      ))
+    }
+    if (node.isSet) {
+      var test = b.tableKeyString(
+        b.identifier(`set${name}`),
+        b.functionExpression([ b.identifier("var") ], true, [
+          b.assignmentStatement([
+            b.memberExpression(b.selfExpression(), ".", b.identifier(rawName))
+          ], [
+            b.identifier("var")
+          ]),
+          b.returnStatement([
+            b.selfExpression()
+          ])
+        ])
+      )
+
+      this.setters.push(test)
     }
   }
 

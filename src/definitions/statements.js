@@ -143,7 +143,11 @@ defineType("ClassMemberStatement", {
   builder: [ "identifier", "expression", "isStatic" ],
   aliases: [ "Statement" ]
 });
-
+defineType("ClassGetSetStatement", {
+  visitors: [ "identifier" ],
+  builder: [ "identifier", "isGet", "isSet" ],
+  aliases: [ "Statement" ]
+});
 defineType("StopIfStatement", {
   visitors: [ "arguments" ],
   builder: [ "arguments" ],

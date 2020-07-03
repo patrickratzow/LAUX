@@ -770,14 +770,20 @@ function parseClassBodyStatement() {
   pushLocation(marker);
 
   var isStatic = consume('static');
+  var get = consume('_get');
+  var set = consume('_set');
 
+  
   if (token.value == 'constructor') classConstructorToken = token;
   let expression = parseIdentifier();
   let isConstructor = expression.name === 'constructor';
 
   var statement;
 
-  if (token.value == '=') {
+  if (get || set) {
+    statement = b.classGetSetStatement(expression, get, set);
+  }
+  else if (token.value == '=') {
     var marker;
 
     var identifier = expression
