@@ -3,5 +3,6 @@
 dist/
 node_modules/
 lau/
+laux/
 lua/
 .vscode/
