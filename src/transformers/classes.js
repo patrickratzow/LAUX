@@ -540,7 +540,7 @@ export default class ClassTransformer {
     if (node.isGet) {
       this.getters.push(b.tableKeyString(
         b.identifier(`get${name}`),
-        b.functionExpression([], true, [
+        b.functionExpression([ b.selfExpression() ], true, [
           b.returnStatement([
             b.memberExpression(
               b.selfExpression(),
@@ -556,7 +556,7 @@ export default class ClassTransformer {
 
       var test = b.tableKeyString(
         b.identifier(`set${name}`),
-        b.functionExpression([ idParam ], true, [
+        b.functionExpression([ b.selfExpression(), idParam ], true, [
           b.assignmentStatement([
             b.memberExpression(b.selfExpression(), ".", b.identifier(rawName))
           ], [
