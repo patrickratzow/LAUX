@@ -1,4 +1,1 @@
-public class Test
-    price = 5
-    _get _set price
-end
+a = () => end

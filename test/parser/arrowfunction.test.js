@@ -12,11 +12,11 @@ export default {
    */
   fatExpression: function() {
       var ast = parser.parse("a = () => end");
-      var statement = ast.body[0];
+      var statement = ast.chunk.body[0];
       var declaration = statement.init[0];
 
       expect(declaration).to.deep.equal({
-        type: "FatArrowDeclaration",
+        type: "FatArrowExpression",
         parameters: [],
         body: []
       });
@@ -27,11 +27,11 @@ export default {
    */
   fatExpressionBody: function() {
       var ast = parser.parse("a = () => print('hi') end");
-      var statement = ast.body[0];
+      var statement = ast.chunk.body[0];
       var declaration = statement.init[0];
 
       expect(declaration).to.containSubset({
-        type: "FatArrowDeclaration",
+        type: "FatArrowExpression",
         parameters: [],
         body: [{
           expression: {
@@ -57,11 +57,11 @@ export default {
    */
   thinExpression: function() {
       var ast = parser.parse("a = () -> end");
-      var statement = ast.body[0];
+      var statement = ast.chunk.body[0];
       var declaration = statement.init[0];
 
       expect(declaration).to.containSubset({
-        type: "ThinArrowDeclaration",
+        type: "ThinArrowExpression",
         parameters: [{
           type: "Identifier",
           name: "self"
@@ -75,11 +75,11 @@ export default {
    */
   thinExpressionBody: function() {
       var ast = parser.parse("a = () -> print('hi') end");
-      var statement = ast.body[0];
+      var statement = ast.chunk.body[0];
       var declaration = statement.init[0];
 
       expect(declaration).to.containSubset({
-        type: "ThinArrowDeclaration",
+        type: "ThinArrowExpression",
         parameters: [{
           type: "Identifier",
           name: "self"
