@@ -381,26 +381,30 @@ export default class CodeGenerator {
       }
     },
     FatArrowExpression(node) {
-      this.word("function");
-      this.token("(");
+      this.nodes.FunctionExpression.call(this, node);
 
-      this.printList(node.parameters);
+      if (false) {
+        this.word("function");
+        this.token("(");
 
-      this.token(")")
+        this.printList(node.parameters);
 
-      const len = node.body.length
-      if (len) {
-        if (len <= 1)
-          this.space()
+        this.token(")")
 
-        this.printSequence(node.body, { indent: len >= 1 });
+        const len = node.body.length
+        if (len) {
+          if (len <= 1)
+            this.space()
 
-        if (len <= 1)
-          this.space()
+          this.printSequence(node.body, { indent: len >= 1 });
 
+          if (len <= 1)
+            this.space()
+
+        }
+
+        this.word("end");
       }
-
-      this.word("end");
     },
     ThinArrowExpression(node) {
       this.nodes.FatArrowExpression.call(this, node);

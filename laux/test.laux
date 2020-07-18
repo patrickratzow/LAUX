@@ -1,1 +1,7 @@
-a = () => end
+        class Test
+          _get _set id
+
+          __type() 
+            return "Test" 
+          end
+        end
