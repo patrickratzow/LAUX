@@ -7,8 +7,11 @@ LAU as a project is dead. This fork is an attempt to revitalise Metamist's proje
 LAUX is a superset of Lua, adding syntax sugar on top of Lua. It does however still work with vanilla Lua.
 
 # How to use
+You will need to install [Node.js](https://nodejs.org) to use this.
+
+Open up a terminal of your choice, and type this.
 ```cmd
-cd node-path
+cd path_to_directory_with_this_in
 npm install
 node index.js watch "addon_path\laux" "addon_path\lua"
 ```
