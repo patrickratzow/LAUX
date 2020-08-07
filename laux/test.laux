@@ -1,7 +1,13 @@
-        class Test
-          _get _set id
+public class Thing
+  name = "Unknown"
+end
 
-          __type() 
-            return "Test" 
-          end
-        end
+public class Person extends Thing
+  say_name()
+    print(`Hello, I am ${self.name}`)
+  end
+end
+
+local person = Person()
+person.name = ""
+person:say_name()

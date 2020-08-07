@@ -25,9 +25,9 @@ var defaultOptions = {
 
 var generateLAUIdentifier = function(expression, isLocal, name) {
 	var id = lauIdx++;
-	var str = `__laui${id}`;
+	var str = `__lauxi${id}`;
 	if (name)
-		str = `__lau_${name}_${id}`;
+		str = `__laux_${name}_${id}`;
 
   return b.identifier(str, true);
 };
@@ -1047,7 +1047,7 @@ function compileFunctionStatement(statement) {
       constructName(param.typeCheck)
 
       const types = name.split("|")
-      const typeName = `__lau_type`
+      const typeName = `__laux_type`
       const andExpression = b.logicalExpression(
         "and",
         b.logicalExpression(
@@ -1357,7 +1357,7 @@ var compiler = {
             constructName(param.typeCheck)
 
             const types = name.split("|")
-            const typeName = `__lau_type`
+            const typeName = `__laux_type`
             const andExpression = b.logicalExpression(
               "and",
               b.logicalExpression(
