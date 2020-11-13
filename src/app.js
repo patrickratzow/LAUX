@@ -183,19 +183,41 @@ function compileFolder(root) {
   });
 }
 
+function handleFileEvent(event, root, file, out) {
+  let fileExtension = file.split('.').pop();
+
+  if (fileExtension == "laux") {
+    return compileFile(root, file, out);
+  } else if (fileExtension == "lua") {
+    var inPath = path.join(root, file);
+    var inPathNoExt = inPath.slice(0, -path.extname(inPath).length);
+
+    jetpack
+      .copyAsync(inPathNoExt + ".lua", path.join(out, file), {
+        overwrite: true
+      })
+      .then(() => {
+      console.log(chalk.magenta("LAUX") + " " +
+        chalk.cyan("COPIED") + " " + file);
+    }).catch((e) => {
+      console.log("err", e);
+    });
+  }
+}
+
 function watchFolder(root, out) {
-  var watcher = chokidar.watch(path.join(root, "**/*.laux"));
+  var watcher = chokidar.watch(path.join(root, "**/*.{lua,laux}"));
 
   watcher.on("add", filePath => {
     var relativePath = path.relative(root, filePath)
     console.log(chalk.magenta("LAUX") + " " + chalk.green("ADD") + " " + chalk.yellow(relativePath));
-    compileFile(root, relativePath, out);
+    handleFileEvent("add", root, relativePath, out);
   });
 
   watcher.on("change", filePath => {
     var relativePath = path.relative(root, filePath)
     console.log(chalk.magenta("LAUX") + " " + chalk.cyan("CHANGE") + " " + chalk.yellow(relativePath));
-    compileFile(root, relativePath, out);
+    handleFileEvent("change", root, relativePath, out);
   });
 
   watcher.on("unlink", filePath => {
