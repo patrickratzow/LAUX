@@ -43,6 +43,6 @@
   "author": "Metamist",
   "license": "ISC",
   "bin": {
-    "lauc": "bin/lauc"
+    "lauxc": "./bin/lauxc"
   }
 }
