@@ -1,13 +1,2 @@
-public class Thing
-  name = "Unknown"
+class Thing
 end
-
-public class Person extends Thing
-  say_name()
-    print(`Hello, I am ${self.name}`)
-  end
-end
-
-local person = Person()
-person.name = ""
-person:say_name()

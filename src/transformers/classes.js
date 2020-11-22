@@ -393,10 +393,6 @@ export default class ClassTransformer {
     }
 
     if (!typeMethod) {
-      if (!this.path.node.isPublic) {
-        throw new Error("Non public classes needs to use overwrite __type()");
-      }
-
       this.methods.push(
         b.tableKeyString(
           b.identifier("__type"),
