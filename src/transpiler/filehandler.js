@@ -2,6 +2,7 @@ import path from "path";
 import chokidar from "chokidar";
 import chalk from "chalk";
 import jetpack from "fs-jetpack";
+import highlighter from "../highlighter";
 import compile from "./compile";
 import CodeGenerator from "../codegenerator";
 import glob from "fast-glob";
@@ -172,8 +173,30 @@ export default class FileHandler {
           fileName + ".lua " + chalk.cyan(aggregate) + chalk.green(roundedElapsed + "ms"));
       } catch (e) {
         if (e instanceof SyntaxError) {
+          var lines = content.split(/\r?\n/);
+
+          var lineStart = Math.max(0, e.line - 3);
+          var lineEnd = Math.min(lines.length, e.line + 3);
+
           console.log(chalk.magenta("LAUX") + " " +
-            chalk.red("ERROR") + ` ${e.stack}`)
+            chalk.red("ERROR") + " " + `SyntaxError: ${fileName}: ${e.message}`);
+
+          for (var i = lineStart; i < lineEnd; i++) {
+            var line = lines[i];
+
+            var c1 = i + 1 == e.line ? ">" : " ";
+            var lineFillStr = new Array((lineEnd.toString().length - (i + 1).toString().length) + 1).join(" ");
+            var lineStr = lineFillStr + (i + 1).toString();
+            var litLine = highlighter.highlight(line);
+            console.log(chalk.red(c1) + chalk.gray(` ${lineStr} | `) + litLine);
+
+            if (i + 1 == e.line) {
+              var offset = new Array(e.column + 1).join(" ");
+              console.log(" " + chalk.gray(new Array(lineStr.length + 2).join(" ") + ` | `) + chalk.red(offset + "^"));
+            }
+          }
+
+          console.log(e.stack);
         } else {
           console.log(chalk.magenta("LAUX") + " " +
             chalk.red("ERROR") + ` ${fileName}:`);
