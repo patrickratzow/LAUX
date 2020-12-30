@@ -139,7 +139,7 @@ export default class FileHandler {
       for (const filePath of files) {
         const file = this.fileMap.get(filePath);
         if (file !== undefined) {
-          str += `${file.getContent()} \r\n------------ Split Break -------------\r\n`;
+          str += `do\r\n${file.getContent()}\r\nend\r\n------------ Split Break -------------\r\n`;
         } else {
           console.log(chalk.magenta("LAUX") + " " +
             chalk.yellow("WARNING") + ` Unable to find ${filePath} file!`);
@@ -172,7 +172,8 @@ export default class FileHandler {
           fileName + ".lua " + chalk.cyan(aggregate) + chalk.green(roundedElapsed + "ms"));
       } catch (e) {
         if (e instanceof SyntaxError) {
-
+          console.log(chalk.magenta("LAUX") + " " +
+            chalk.red("ERROR") + ` ${e.stack}`)
         } else {
           console.log(chalk.magenta("LAUX") + " " +
             chalk.red("ERROR") + ` ${fileName}:`);
@@ -237,7 +238,7 @@ export default class FileHandler {
         for (const filePath of files) {
           const file = this.fileMap.get(filePath);
           if (file !== undefined) {
-            str += `${file.getContent()} \r\n------------ Split Break -------------\r\n`;
+            str += `do\r\n${file.getContent()}\r\nend\r\n------------ Split Break -------------\r\n`
           } else {
             console.log(chalk.magenta("LAUX") + " " +
               chalk.yellow("WARNING") + ` Unable to find ${filePath} file!`);

@@ -1,0 +1,16 @@
+{
+  "path": {
+    "input": "./laux",
+    "output": "./lua"
+  },
+  "merges": [
+    {
+      "filesGlob": [ "skills/**/*.laux" ],
+      "output": "skills"
+    },
+    {
+      "files": [ "xd2.laux", "xd.laux", "thonk/xd6.laux" ],
+      "output": "xds"
+    }
+  ]
+}

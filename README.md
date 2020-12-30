@@ -54,7 +54,7 @@ To actually use the merge features, you would have to use the release option, wh
 ```bash
 lauxc workspace
 ```
-### Release
+### Release that merges files
 ```bash
 lauxc workspace -r
 ```
