@@ -21,6 +21,8 @@ import parser from "./parser";
 import highlighter from "./highlighter";
 import compiler from "./compiler";
 import CodeGenerator from "./codegenerator";
+import Workspace from "./transpiler/workspace";
+import FileHandler from "./transpiler/filehandler";
 
 var defaultOptions = {
   debug: false,
@@ -30,15 +32,7 @@ var defaultOptions = {
   indent: 4
 };
 
-var options, headerData;
-
-class CompiledFile {
-  constructor(code, ast, compiledAST) {
-    this.code = code;
-    this.ast = ast;
-    this.compiledAST = compiledAST;
-  }
-}
+let fileHandler;
 
 function prefixHeader(code, text) {
   if (text == undefined) {
@@ -205,7 +199,7 @@ function handleFileEvent(event, root, file, out) {
   }
 }
 
-function watchFolder(root, out) {
+function watchFolder(root, out, workspace) {
   var watcher = chokidar.watch(path.join(root, "**/*.{lua,laux}"));
 
   watcher.on("add", filePath => {
@@ -246,10 +240,45 @@ function getAbsolutePath(p) {
   return process.cwd();
 }
 
+function startWatching(dir, out, workspace) {
+  var root = getAbsolutePath(dir);
+  var outDir = getAbsolutePath(out);
+
+  if (!options.indent) {
+    console.log(chalk.magenta("LAUX") + " " +
+      chalk.red("ERROR") + ` Invalid indent size: '${_options.indent}'`);
+
+    return;
+  }
+
+
+  if (options.header) {
+    jetpack.readAsync(path.join(dir, "/header.txt")).then((data) => {
+      if (!data) {
+        console.log(chalk.magenta("LAUX") + " " +
+          chalk.red("ERROR") + ` Error reading header file: "${options.header}" not found.`);
+
+        return;
+      }
+
+      headerData = data.replace(/(^[\r\n]+)|([\r\n]+$)/g, "");
+      headerData = headerData.replace(/%date%/g, new Date().toUTCString());
+
+      watchFolder(root, outDir);
+    }).catch((e) => {
+      console.log(chalk.magenta("LAUX") + " " +
+        chalk.red("ERROR") + " Error reading header file:" + e.stack);
+    });
+  } else {
+    watchFolder(root, outDir);
+  }
+}
+
 commander
-  .version("0.0.1")
+  .version("1.0.0")
   .command("watch <dir> <out>")
   .description("watch specified directory for file changes and compile")
+  .option("-r --release", "Signal that this is a release build")
   .option("-d, --debug")
   .option("-a, --ast", "Generate AST json file along with compiled code.")
   .option("-m, --min", "Minify compiled code.")
@@ -257,46 +286,50 @@ commander
   .option("--indent <size>", "The size of one indent.", parseInt)
   .option("--header", "Header template to place on the top of each compiled file.")
   .action((dir, out, _options) => {
-    var root = getAbsolutePath(dir);
-    var outDir = getAbsolutePath(out);
-
-    options = extend(defaultOptions, {
+    const workspace = new Workspace(JSON.stringify(extend(defaultOptions, {
       debug: _options.debug,
       ast: _options.ast,
-      minify: _options.min,
+      minify: _options.minify,
       obfuscate: _options.obfuscate,
       header: _options.header,
-      indent: _options.indent
-    });
+      indent: _options.indent,
+      path: {
+        input: dir,
+        output: out
+      },
+      merges: []
+    })), _options.release);
+    fileHandler = new FileHandler(workspace);
+  });
 
-    if (!options.indent) {
-      console.log(chalk.magenta("LAUX") + " " +
-        chalk.red("ERROR") + ` Invalid indent size: '${_options.indent}'`);
-
-      return;
+commander
+  .version("1.0.0")
+  .command("workspace [file]")
+  .option("-r --release", "Signal that this is a release build")
+  .description("use a specific json file as configuration. if no file is specified it tries to look at ./lauxconfig.json")
+  .action((file, _options) => {
+    if (file === undefined) {
+      file = getAbsolutePath("./lauxconfig.json")
+    } else {
+      file = getAbsolutePath(file);
     }
 
-
-    if (options.header) {
-      jetpack.readAsync(path.join(dir, "/header.txt")).then((data) => {
-        if (!data) {
+    jetpack.readAsync(file)
+      .then(data => {
+        if (data === undefined) {
           console.log(chalk.magenta("LAUX") + " " +
-            chalk.red("ERROR") + ` Error reading header file: "${options.header}" not found.`);
+            chalk.red("ERROR") + ` Unable to find file "${file}"`);
 
           return;
         }
 
-        headerData = data.replace(/(^[\r\n]+)|([\r\n]+$)/g, "");
-        headerData = headerData.replace(/%date%/g, new Date().toUTCString());
-
-        watchFolder(root, outDir);
-      }).catch((e) => {
+        const workspace = new Workspace(data, _options.release);
+        fileHandler = new FileHandler(workspace);
+      })
+      .catch(e => {
         console.log(chalk.magenta("LAUX") + " " +
-          chalk.red("ERROR") + " Error reading header file:" + e.stack);
-      });
-    } else {
-      watchFolder(root, outDir);
-    }
-  });
+          chalk.red("ERROR") + ` Error happened while trying to find "${file}". Error: ${e.stack}`);
+      })
+  })
 
 commander.parse(process.argv);

@@ -10,15 +10,53 @@ LAUX is a superset of Lua, adding syntax sugar on top of Lua. It does however st
 You will need to install [Node.js](https://nodejs.org) to use this.
 
 Open up a terminal of your choice, and type this.
-```cmd
-cd path_to_directory_with_this_in
+```bash
+cd "path to directory with this in"
 npm install
-node index.js watch "addon_path\laux" "addon_path\lua"
+npm run build
+npm link
 ```
 
-Example of transpiling
-```cmd
-node index.js watch "C:\Ratzow\Gmod\Server - DarkRP\garrysmod\addons\xeninui\laux" "C:\Ratzow\Gmod\Server - DarkRP\garrysmod\addons\xeninui\lua"
+To transpile you simply go the folder your project belongs to
+```bash
+cd "project folder"
+lauxc watch ./laux ./lua
+```
+
+## Workspaces
+There's also an option to use workspaces, which simply means using a configuration file. The config file must be ```lauxconfig.json``` and be located in the root folder.
+
+This allows you to use a lot more options, of which one of the intersting ones are merges. You can merge multiple files into 1 single output file, which are very useful for releases. 
+
+An example of a config file would be this.
+```json
+{
+  "path": {
+    "input": "./laux",
+    "output": "./lua"
+  },
+  "merges": [
+    {
+      "filesGlob": [ "xenin_jobcreator/fields/**/*.laux"],
+      "output": "xenin_jobcreator/fields"
+    },
+    {
+      "filesGlob": [ "xenin_jobcreator/currencies/**/*.laux"],
+      "output": "xenin_jobcreator/currencies"
+    }
+  ]
+}
+```
+
+To actually use the merge features, you would have to use the release option, which is denoted as -r
+
+### No options
+```bash
+lauxc workspace
+```
+### Release
+```bash
+lauxc workspace -r
 ```
 
 # What does it add?
