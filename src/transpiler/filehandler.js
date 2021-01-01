@@ -156,7 +156,7 @@ export default class FileHandler {
     for (const [fileName, content] of Object.entries(filesString)) {
       try {
         const fileObj = this.fileMap.get(fileName);
-        if (fileObj.parse.ext === ".lua") {
+        if (fileObj !== undefined && fileObj.parse.ext === ".lua") {
           this.copyFile(fileName);
 
           console.log(chalk.magenta("LAUX") + " " +
