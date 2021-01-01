@@ -155,6 +155,16 @@ export default class FileHandler {
   transpileFiles(filesString, change = false) {
     for (const [fileName, content] of Object.entries(filesString)) {
       try {
+        const fileObj = this.fileMap.get(fileName);
+        if (fileObj.parse.ext === ".lua") {
+          this.copyFile(fileName);
+
+          console.log(chalk.magenta("LAUX") + " " +
+            (chalk.gray("COPIED")) + " " + fileName + ".lua");
+
+          continue;
+        }
+
         let elapsed = 0;
         const timeStart = process.hrtime();
         const compiledFile = compile.compileCode(content, this.workspace);
@@ -205,6 +215,15 @@ export default class FileHandler {
             chalk.red("ERROR") + ` ${e.stack}`);
         }
       }
+    }
+  }
+
+  async copyFile(fileName) {
+    try {
+      const sourcePath = path.join(this.workspace.getAbsoluteOutput(), "..", this.workspace.getInput());
+      jetpack.copyAsync(path.join(sourcePath, "fileName.lua"), path.join(this.workspace.getAbsoluteOutput(), fileName + ".lua"));
+    } catch (e) {
+      console.error("Error: " + e.stack);
     }
   }
 
