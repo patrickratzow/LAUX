@@ -227,6 +227,17 @@ export default class FileHandler {
     }
   }
 
+  async removeFile(fileObj) {
+    try {
+      jetpack.removeAsync(path.join(this.workspace.getAbsoluteOutput(), fileObj.getPath()));
+
+      console.log(chalk.magenta("LAUX") + " " +
+            (chalk.red("REMOVED")) + " " + fileObj.getPath());
+    } catch (e) {
+      console.error("Error: " + e.stack);
+    }
+  }
+
   async writeFile(fileName) {
     const compiledFile = this.transpileMap.get(fileName);
     const result = new CodeGenerator(compiledFile.code, compiledFile.compiledAST).generate();
@@ -319,10 +330,11 @@ export default class FileHandler {
     watcher.on("unlink", async filePath => {
       const relativePath = path.relative(absolutePath, filePath);
       const fileObj = new CacheFile(relativePath);
+
+      await this.removeFile(fileObj);
+
       this.fileMap.delete(fileObj.getCleanPath());
       this.transpileMap.delete(fileObj.getCleanPath());
-
-      await this.transpileFile(fileObj);
     })
 
     // Give it a second to add everything
