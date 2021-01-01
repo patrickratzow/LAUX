@@ -221,7 +221,7 @@ export default class FileHandler {
   async copyFile(fileName) {
     try {
       const sourcePath = path.join(this.workspace.getAbsoluteOutput(), "..", this.workspace.getInput());
-      jetpack.copyAsync(path.join(sourcePath, "fileName.lua"), path.join(this.workspace.getAbsoluteOutput(), fileName + ".lua"));
+      jetpack.copyAsync(path.join(sourcePath, fileName + ".lua"), path.join(this.workspace.getAbsoluteOutput(), fileName + ".lua"));
     } catch (e) {
       console.error("Error: " + e.stack);
     }
