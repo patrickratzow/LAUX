@@ -275,7 +275,7 @@ function startWatching(dir, out, workspace) {
 }
 
 commander
-  .version("1.0.0")
+  .version("1.1.0")
   .command("watch <dir> <out>")
   .description("watch specified directory for file changes and compile")
   .option("-r --release", "Signal that this is a release build")
@@ -303,7 +303,7 @@ commander
   });
 
 commander
-  .version("1.0.0")
+  .version("1.1.0")
   .command("workspace [file]")
   .option("-r --release", "Signal that this is a release build")
   .description("use a specific json file as configuration. if no file is specified it tries to look at ./lauxconfig.json")
