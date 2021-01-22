@@ -1003,7 +1003,7 @@ function parseAssignmentOrCallStatement() {
     return finishNode(b.assignmentStatement(variables, init));
   }
   else {
-    if ('+=-=*=/=%=||=..='.indexOf(token.value) >= 0) {
+    if ('+=-=*=/=%=||=..=??='.indexOf(token.value) >= 0) {
       var sign = token.value.substring(0, token.value.length - 1);
       validateVar(expression);
 
@@ -1285,6 +1285,7 @@ function binaryPrecedence(operator) {
       case 111: return 1; // or
       case 124: return 1; // ||
       case 38: return 1; // &&
+      case 63: return 6; // ??
     }
   } else if (97 === charCode && 'and' === operator) return 2;
   return 0;
@@ -1674,7 +1675,6 @@ function parsePrimaryExpression() {
       if (null !== exp)
         return finishNode(b.spreadExpression(exp))
     }
-
 
     return finishNode(b.literal(type, value, raw));
   } else if (Keyword === type && 'function' === value) {
