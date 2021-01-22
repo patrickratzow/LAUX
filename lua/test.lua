@@ -12,8 +12,8 @@ do
     __init = function(self) end,
     __base = _base_0,
     find = function(id)
-      local __laux_promise_5 = XeninUI.Promises.new()
-      return __laux_promise_5:resolve({
+      local __laux_promise_4 = XeninUI.Promises.new()
+      return __laux_promise_4:resolve({
       money = 500 })
     end
   }, {
@@ -29,14 +29,13 @@ end
 
 function hasMoney(sid64, amt)
   local __laux_promise_0 = XeninUI.Promises.new()
-  local __lauxi1
-  Users.find(sid64):next(function(__laux_result_2)
-    __lauxi1 = __laux_result_2
-    assert(__lauxi1 ~= nil, "cannot destructure nil value")
-    local money = __lauxi1.money
-    return __laux_promise_0:resolve((money || 0) > amt)
-  end, function(__laux_error_3)
-    return __laux_promise_0:reject(__laux_error_3)
+  local user
+
+  Users.find(sid64):next(function(__laux_result_1)
+    user = __laux_result_1
+    return __laux_promise_0:resolve(((user and user.money) ~= nil and (user and user.money) or 0) > amt)
+  end, function(__laux_error_2)
+    return __laux_promise_0:reject(__laux_error_2)
   end)
   return __laux_promise_0
 end

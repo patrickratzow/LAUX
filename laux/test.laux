@@ -1,11 +1,12 @@
 class Users
   static async find(id)
-    return { money = 500 }-- we pretend for science
+    return { money = 500 } -- we pretend for science
   end
 end
 
 async function hasMoney(sid64, amt)
-  local { money } = await Users.find(sid64)
+  local user = await Users.find(sid64)
 
-  return (money || 0) > amt
+  return user?.money ?? 0 > amt
 end
+

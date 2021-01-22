@@ -229,7 +229,7 @@
                               "variables": [
                                 {
                                   "type": "Identifier",
-                                  "name": "__laux_promise_5",
+                                  "name": "__laux_promise_4",
                                   "isLocal": true
                                 }
                               ],
@@ -268,7 +268,7 @@
                                     "type": "MemberExpression",
                                     "base": {
                                       "type": "Identifier",
-                                      "name": "__laux_promise_5",
+                                      "name": "__laux_promise_4",
                                       "isLocal": true
                                     },
                                     "indexer": ":",
@@ -529,8 +529,8 @@
             }
           },
           "range": [
-            120,
-            128
+            121,
+            129
           ]
         },
         "parameters": [
@@ -549,8 +549,8 @@
               }
             },
             "range": [
-              129,
-              134
+              130,
+              135
             ]
           },
           {
@@ -568,8 +568,8 @@
               }
             },
             "range": [
-              136,
-              139
+              137,
+              140
             ]
           }
         ],
@@ -615,11 +615,39 @@
             "variables": [
               {
                 "type": "Identifier",
-                "name": "__lauxi1",
-                "isLocal": true
+                "name": "user",
+                "isLocal": true,
+                "loc": {
+                  "start": {
+                    "line": 8,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 8,
+                    "column": 12
+                  }
+                },
+                "range": [
+                  151,
+                  155
+                ]
               }
             ],
-            "init": []
+            "init": [],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 2
+              },
+              "end": {
+                "line": 8,
+                "column": 38
+              }
+            },
+            "range": [
+              145,
+              181
+            ]
           },
           {
             "type": "CallStatement",
@@ -636,16 +664,16 @@
                     "loc": {
                       "start": {
                         "line": 8,
-                        "column": 26
+                        "column": 21
                       },
                       "end": {
                         "line": 8,
-                        "column": 31
+                        "column": 26
                       }
                     },
                     "range": [
-                      168,
-                      173
+                      164,
+                      169
                     ]
                   },
                   "indexer": ".",
@@ -655,31 +683,31 @@
                     "loc": {
                       "start": {
                         "line": 8,
-                        "column": 32
+                        "column": 27
                       },
                       "end": {
                         "line": 8,
-                        "column": 36
+                        "column": 31
                       }
                     },
                     "range": [
-                      174,
-                      178
+                      170,
+                      174
                     ]
                   },
                   "loc": {
                     "start": {
                       "line": 8,
-                      "column": 26
+                      "column": 21
                     },
                     "end": {
                       "line": 8,
-                      "column": 43
+                      "column": 38
                     }
                   },
                   "range": [
-                    168,
-                    185
+                    164,
+                    181
                   ]
                 },
                 "arguments": [
@@ -690,32 +718,32 @@
                     "loc": {
                       "start": {
                         "line": 8,
-                        "column": 37
+                        "column": 32
                       },
                       "end": {
                         "line": 8,
-                        "column": 42
+                        "column": 37
                       }
                     },
                     "range": [
-                      179,
-                      184
+                      175,
+                      180
                     ]
                   }
                 ],
                 "loc": {
                   "start": {
                     "line": 8,
-                    "column": 26
+                    "column": 21
                   },
                   "end": {
                     "line": 8,
-                    "column": 43
+                    "column": 38
                   }
                 },
                 "range": [
-                  168,
-                  185
+                  164,
+                  181
                 ]
               },
               "indexer": ":",
@@ -731,7 +759,7 @@
                     "parameters": [
                       {
                         "type": "Identifier",
-                        "name": "__laux_result_2",
+                        "name": "__laux_result_1",
                         "isLocal": true
                       }
                     ],
@@ -742,99 +770,14 @@
                         "variables": [
                           {
                             "type": "Identifier",
-                            "name": "__lauxi1"
+                            "name": "user"
                           }
                         ],
                         "init": [
                           {
                             "type": "Identifier",
-                            "name": "__laux_result_2",
+                            "name": "__laux_result_1",
                             "isLocal": true
-                          }
-                        ]
-                      },
-                      {
-                        "type": "CallStatement",
-                        "expression": {
-                          "type": "CallExpression",
-                          "base": {
-                            "type": "Identifier",
-                            "name": "assert"
-                          },
-                          "arguments": [
-                            {
-                              "type": "BinaryExpression",
-                              "operator": "~=",
-                              "left": {
-                                "type": "Identifier",
-                                "name": "__lauxi1",
-                                "isLocal": true
-                              },
-                              "right": {
-                                "type": "NilLiteral",
-                                "value": null,
-                                "raw": "nil"
-                              }
-                            },
-                            {
-                              "type": "StringLiteral",
-                              "value": "cannot destructure nil value",
-                              "raw": "\"cannot destructure nil value\""
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "type": "LocalStatement",
-                        "variables": [
-                          {
-                            "type": "Identifier",
-                            "name": "money",
-                            "isLocal": true,
-                            "loc": {
-                              "start": {
-                                "line": 8,
-                                "column": 10
-                              },
-                              "end": {
-                                "line": 8,
-                                "column": 15
-                              }
-                            },
-                            "range": [
-                              152,
-                              157
-                            ]
-                          }
-                        ],
-                        "init": [
-                          {
-                            "type": "MemberExpression",
-                            "base": {
-                              "type": "Identifier",
-                              "name": "__lauxi1",
-                              "isLocal": true
-                            },
-                            "indexer": ".",
-                            "identifier": {
-                              "type": "Identifier",
-                              "name": "money",
-                              "isLocal": true,
-                              "loc": {
-                                "start": {
-                                  "line": 8,
-                                  "column": 10
-                                },
-                                "end": {
-                                  "line": 8,
-                                  "column": 15
-                                }
-                              },
-                              "range": [
-                                152,
-                                157
-                              ]
-                            }
                           }
                         ]
                       },
@@ -862,25 +805,71 @@
                                 "operator": ">",
                                 "left": {
                                   "type": "BinaryExpression",
-                                  "operator": "||",
+                                  "operator": "??",
                                   "left": {
-                                    "type": "Identifier",
-                                    "name": "money",
-                                    "isLocal": true,
-                                    "loc": {
-                                      "start": {
-                                        "line": 10,
-                                        "column": 10
+                                    "type": "BinaryExpression",
+                                    "operator": "and",
+                                    "left": {
+                                      "type": "Identifier",
+                                      "name": "user",
+                                      "isLocal": true,
+                                      "loc": {
+                                        "start": {
+                                          "line": 10,
+                                          "column": 9
+                                        },
+                                        "end": {
+                                          "line": 10,
+                                          "column": 13
+                                        }
                                       },
-                                      "end": {
-                                        "line": 10,
-                                        "column": 15
+                                      "range": [
+                                        194,
+                                        198
+                                      ]
+                                    },
+                                    "right": {
+                                      "type": "MemberExpression",
+                                      "base": {
+                                        "type": "Identifier",
+                                        "name": "user",
+                                        "isLocal": true,
+                                        "loc": {
+                                          "start": {
+                                            "line": 10,
+                                            "column": 9
+                                          },
+                                          "end": {
+                                            "line": 10,
+                                            "column": 13
+                                          }
+                                        },
+                                        "range": [
+                                          194,
+                                          198
+                                        ]
+                                      },
+                                      "indexer": ".",
+                                      "identifier": {
+                                        "type": "Identifier",
+                                        "name": "money",
+                                        "loc": {
+                                          "start": {
+                                            "line": 10,
+                                            "column": 15
+                                          },
+                                          "end": {
+                                            "line": 10,
+                                            "column": 20
+                                          }
+                                        },
+                                        "range": [
+                                          200,
+                                          205
+                                        ]
                                       }
                                     },
-                                    "range": [
-                                      199,
-                                      204
-                                    ]
+                                    "inParens": true
                                   },
                                   "right": {
                                     "type": "NumericLiteral",
@@ -889,33 +878,32 @@
                                     "loc": {
                                       "start": {
                                         "line": 10,
-                                        "column": 19
+                                        "column": 24
                                       },
                                       "end": {
                                         "line": 10,
-                                        "column": 20
+                                        "column": 25
                                       }
                                     },
                                     "range": [
-                                      208,
-                                      209
+                                      209,
+                                      210
                                     ]
                                   },
                                   "loc": {
                                     "start": {
                                       "line": 10,
-                                      "column": 10
+                                      "column": 9
                                     },
                                     "end": {
                                       "line": 10,
-                                      "column": 20
+                                      "column": 31
                                     }
                                   },
                                   "range": [
-                                    199,
-                                    209
-                                  ],
-                                  "inParens": true
+                                    194,
+                                    216
+                                  ]
                                 },
                                 "right": {
                                   "type": "Identifier",
@@ -924,11 +912,11 @@
                                   "loc": {
                                     "start": {
                                       "line": 10,
-                                      "column": 24
+                                      "column": 28
                                     },
                                     "end": {
                                       "line": 10,
-                                      "column": 27
+                                      "column": 31
                                     }
                                   },
                                   "range": [
@@ -943,11 +931,11 @@
                                   },
                                   "end": {
                                     "line": 10,
-                                    "column": 27
+                                    "column": 31
                                   }
                                 },
                                 "range": [
-                                  198,
+                                  194,
                                   216
                                 ]
                               }
@@ -963,7 +951,7 @@
                     "parameters": [
                       {
                         "type": "Identifier",
-                        "name": "__laux_error_3",
+                        "name": "__laux_error_2",
                         "isLocal": true
                       }
                     ],
@@ -989,7 +977,7 @@
                             "arguments": [
                               {
                                 "type": "Identifier",
-                                "name": "__laux_error_3",
+                                "name": "__laux_error_2",
                                 "isLocal": true
                               }
                             ]
@@ -1028,7 +1016,7 @@
           }
         },
         "range": [
-          105,
+          106,
           221
         ]
       }
@@ -1097,8 +1085,8 @@
         }
       },
       "range": [
-        120,
-        128
+        121,
+        129
       ]
     }
   ],
@@ -1359,8 +1347,8 @@
       "type": "Keyword",
       "value": "end",
       "range": [
-        93,
-        96
+        94,
+        97
       ],
       "loc": {
         "start": {
@@ -1377,8 +1365,8 @@
       "type": "Keyword",
       "value": "end",
       "range": [
-        98,
-        101
+        99,
+        102
       ],
       "loc": {
         "start": {
@@ -1395,8 +1383,8 @@
       "type": "Keyword",
       "value": "async",
       "range": [
-        105,
-        110
+        106,
+        111
       ],
       "loc": {
         "start": {
@@ -1413,8 +1401,8 @@
       "type": "Keyword",
       "value": "function",
       "range": [
-        111,
-        119
+        112,
+        120
       ],
       "loc": {
         "start": {
@@ -1431,8 +1419,8 @@
       "type": "Identifier",
       "value": "hasMoney",
       "range": [
-        120,
-        128
+        121,
+        129
       ],
       "loc": {
         "start": {
@@ -1449,8 +1437,8 @@
       "type": "Punctuator",
       "value": "(",
       "range": [
-        128,
-        129
+        129,
+        130
       ],
       "loc": {
         "start": {
@@ -1467,8 +1455,8 @@
       "type": "Identifier",
       "value": "sid64",
       "range": [
-        129,
-        134
+        130,
+        135
       ],
       "loc": {
         "start": {
@@ -1485,8 +1473,8 @@
       "type": "Punctuator",
       "value": ",",
       "range": [
-        134,
-        135
+        135,
+        136
       ],
       "loc": {
         "start": {
@@ -1503,8 +1491,8 @@
       "type": "Identifier",
       "value": "amt",
       "range": [
-        136,
-        139
+        137,
+        140
       ],
       "loc": {
         "start": {
@@ -1521,8 +1509,8 @@
       "type": "Punctuator",
       "value": ")",
       "range": [
-        139,
-        140
+        140,
+        141
       ],
       "loc": {
         "start": {
@@ -1539,8 +1527,8 @@
       "type": "Keyword",
       "value": "local",
       "range": [
-        144,
-        149
+        145,
+        150
       ],
       "loc": {
         "start": {
@@ -1554,11 +1542,11 @@
       }
     },
     {
-      "type": "Punctuator",
-      "value": "{",
+      "type": "Identifier",
+      "value": "user",
       "range": [
-        150,
-        151
+        151,
+        155
       ],
       "loc": {
         "start": {
@@ -1567,43 +1555,7 @@
         },
         "end": {
           "line": 8,
-          "column": 9
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "money",
-      "range": [
-        152,
-        157
-      ],
-      "loc": {
-        "start": {
-          "line": 8,
-          "column": 10
-        },
-        "end": {
-          "line": 8,
-          "column": 15
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": "}",
-      "range": [
-        158,
-        159
-      ],
-      "loc": {
-        "start": {
-          "line": 8,
-          "column": 16
-        },
-        "end": {
-          "line": 8,
-          "column": 17
+          "column": 12
         }
       }
     },
@@ -1611,17 +1563,17 @@
       "type": "Punctuator",
       "value": "=",
       "range": [
-        160,
-        161
+        156,
+        157
       ],
       "loc": {
         "start": {
           "line": 8,
-          "column": 18
+          "column": 13
         },
         "end": {
           "line": 8,
-          "column": 19
+          "column": 14
         }
       }
     },
@@ -1629,17 +1581,17 @@
       "type": "Keyword",
       "value": "await",
       "range": [
-        162,
-        167
+        158,
+        163
       ],
       "loc": {
         "start": {
           "line": 8,
-          "column": 20
+          "column": 15
         },
         "end": {
           "line": 8,
-          "column": 25
+          "column": 20
         }
       }
     },
@@ -1647,8 +1599,26 @@
       "type": "Identifier",
       "value": "Users",
       "range": [
-        168,
-        173
+        164,
+        169
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 21
+        },
+        "end": {
+          "line": 8,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": ".",
+      "range": [
+        169,
+        170
       ],
       "loc": {
         "start": {
@@ -1657,25 +1627,7 @@
         },
         "end": {
           "line": 8,
-          "column": 31
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": ".",
-      "range": [
-        173,
-        174
-      ],
-      "loc": {
-        "start": {
-          "line": 8,
-          "column": 31
-        },
-        "end": {
-          "line": 8,
-          "column": 32
+          "column": 27
         }
       }
     },
@@ -1683,8 +1635,44 @@
       "type": "Identifier",
       "value": "find",
       "range": [
+        170,
+        174
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 27
+        },
+        "end": {
+          "line": 8,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "(",
+      "range": [
         174,
-        178
+        175
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 31
+        },
+        "end": {
+          "line": 8,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "sid64",
+      "range": [
+        175,
+        180
       ],
       "loc": {
         "start": {
@@ -1693,43 +1681,7 @@
         },
         "end": {
           "line": 8,
-          "column": 36
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": "(",
-      "range": [
-        178,
-        179
-      ],
-      "loc": {
-        "start": {
-          "line": 8,
-          "column": 36
-        },
-        "end": {
-          "line": 8,
           "column": 37
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "sid64",
-      "range": [
-        179,
-        184
-      ],
-      "loc": {
-        "start": {
-          "line": 8,
-          "column": 37
-        },
-        "end": {
-          "line": 8,
-          "column": 42
         }
       }
     },
@@ -1737,17 +1689,17 @@
       "type": "Punctuator",
       "value": ")",
       "range": [
-        184,
-        185
+        180,
+        181
       ],
       "loc": {
         "start": {
           "line": 8,
-          "column": 42
+          "column": 37
         },
         "end": {
           "line": 8,
-          "column": 43
+          "column": 38
         }
       }
     },
@@ -1755,8 +1707,8 @@
       "type": "Keyword",
       "value": "return",
       "range": [
-        191,
-        197
+        187,
+        193
       ],
       "loc": {
         "start": {
@@ -1770,11 +1722,11 @@
       }
     },
     {
-      "type": "Punctuator",
-      "value": "(",
+      "type": "Identifier",
+      "value": "user",
       "range": [
-        198,
-        199
+        194,
+        198
       ],
       "loc": {
         "start": {
@@ -1783,21 +1735,21 @@
         },
         "end": {
           "line": 10,
-          "column": 10
+          "column": 13
         }
       }
     },
     {
-      "type": "Identifier",
-      "value": "money",
+      "type": "Punctuator",
+      "value": "?.",
       "range": [
-        199,
-        204
+        198,
+        200
       ],
       "loc": {
         "start": {
           "line": 10,
-          "column": 10
+          "column": 13
         },
         "end": {
           "line": 10,
@@ -1806,20 +1758,38 @@
       }
     },
     {
-      "type": "Punctuator",
-      "value": "||",
+      "type": "Identifier",
+      "value": "money",
       "range": [
-        205,
-        207
+        200,
+        205
       ],
       "loc": {
         "start": {
           "line": 10,
-          "column": 16
+          "column": 15
         },
         "end": {
           "line": 10,
-          "column": 18
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "??",
+      "range": [
+        206,
+        208
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 21
+        },
+        "end": {
+          "line": 10,
+          "column": 23
         }
       }
     },
@@ -1827,35 +1797,17 @@
       "type": "NumericLiteral",
       "value": 0,
       "range": [
-        208,
-        209
-      ],
-      "loc": {
-        "start": {
-          "line": 10,
-          "column": 19
-        },
-        "end": {
-          "line": 10,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": ")",
-      "range": [
         209,
         210
       ],
       "loc": {
         "start": {
           "line": 10,
-          "column": 20
+          "column": 24
         },
         "end": {
           "line": 10,
-          "column": 21
+          "column": 25
         }
       }
     },
@@ -1869,11 +1821,11 @@
       "loc": {
         "start": {
           "line": 10,
-          "column": 22
+          "column": 26
         },
         "end": {
           "line": 10,
-          "column": 23
+          "column": 27
         }
       }
     },
@@ -1887,11 +1839,11 @@
       "loc": {
         "start": {
           "line": 10,
-          "column": 24
+          "column": 28
         },
         "end": {
           "line": 10,
-          "column": 27
+          "column": 31
         }
       }
     },
@@ -1917,16 +1869,16 @@
       "type": "EOF",
       "value": "<eof>",
       "range": [
-        223,
-        223
+        225,
+        225
       ],
       "loc": {
         "start": {
-          "line": 12,
+          "line": 13,
           "column": 0
         },
         "end": {
-          "line": 12,
+          "line": 13,
           "column": 0
         }
       }
