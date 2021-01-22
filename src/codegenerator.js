@@ -293,16 +293,31 @@ export default class CodeGenerator {
     },
     BinaryExpression(node) {
       if (node.inParens) this.token("(");
+      const isNilishCoalescing = node.operator === "??";
+      if (isNilishCoalescing) this.token("(")
 
       this.print(node.left);
       this.space();
 
-      this.token(node.operator);
+      if (isNilishCoalescing) {
+        this.token("~=")
+        this.space()
+        this.token("nil")
+        this.space()
+        this.token("and")
+        this.space()
+        this.print(node.left)
+        this.space()
+        this.token("or")
+      } else {
+        this.token(node.operator);
+      }
 
       this.space();
       this.print(node.right);
 
       if (node.inParens) this.token(")");
+      if (isNilishCoalescing) this.token(")")
     },
     UnaryExpression(node) {
       if (node.inParens) this.token("(");

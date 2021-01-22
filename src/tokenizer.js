@@ -236,6 +236,10 @@ function lex() {
     if (46 === next) return scanPunctuator("?.");
     if (91 === next) return scanPunctuator("?[");
     if (58 === next) return scanPunctuator("?:");
+    if (63 === next) {
+      if (61 === input.charCodeAt(index + 2)) return scanPunctuator("??=");
+      return scanPunctuator("??");
+    }
 
   case 61: // =
     if (61 === next) return scanPunctuator("==");
@@ -810,7 +814,7 @@ function isIdentifierPart(charCode) {
 function isKeyword(id) {
   switch (id.length) {
     case 2:
-      return "do" === id || "if" === id || "in" === id || "of" === id || "or" === id || "&&" === id || "||" === id;
+      return "do" === id || "if" === id || "in" === id || "of" === id || "or" === id || "&&" === id || "||" === id || "??" === id;
     case 3:
       return "and" === id || "end" === id || "for" === id || "not" === id;
     case 4:
