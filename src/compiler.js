@@ -1,4 +1,4 @@
-import _ from "underscore";
+import _, { unique } from "underscore";
 import extend from "extend";
 
 import * as b from "./builder";
@@ -10,6 +10,7 @@ import CodeGenerator from "./codegenerator";
 import ClassTransformer from "./transformers/classes";
 
 import createConcatFunction from "./lau-functions/concat";
+import { uniqueId } from "lodash";
 
 var ast, options, lauIdx;
 var currentClass;
@@ -1332,7 +1333,6 @@ var compiler = {
 
       "FunctionDeclaration|FunctionExpression|FatArrowExpression|ThinArrowExpression"(path) {
         const node = path.node;
-
         var typeChecks = []
         _.each(node.parameters, (param => {
           if (param.typeCheck) {
@@ -1460,6 +1460,62 @@ var compiler = {
         if (defaultValues.length) {
           node.body.unshift.apply(node.body, defaultValues);
         }
+
+        if (node.async) {
+          const uniqueIdentifier = generateLAUIdentifier(undefined, undefined, "promise");
+          const existingReturn = [];
+          let foundAt = -1
+          for (let i = 0; i < node.body.length && foundAt === -1; i++) {
+            const entry = node.body[i];
+            if (entry.type !== "ReturnStatement") continue;
+
+            for (const argument of entry.arguments) {
+              existingReturn.push(argument);
+            }
+            foundAt = i;
+          }
+          const insertNode = b.returnStatement([
+            b.callExpression(
+              b.memberExpression(
+                uniqueIdentifier,
+                ":",
+                b.identifier("resolve")
+              ),
+              existingReturn
+            )
+          ]);
+          
+          if (foundAt !== -1) {
+            node.body[foundAt] = insertNode;
+          } else {
+            node.body.push.apply(node.body, [ insertNode ]);
+          }
+
+          const promiseInit = b.localStatement(
+            [
+              uniqueIdentifier
+            ],
+            [
+              b.callExpression(
+                b.memberExpression(
+                  b.identifier("XeninUI"),
+                  ".",
+                  b.memberExpression(
+                    b.identifier("Promises"),
+                    ".",
+                    b.identifier("new")
+                  )
+                )
+              )
+            ]
+          );
+          node.body.unshift.apply(node.body, [ promiseInit ]);
+
+          const promiseReturn = b.returnStatement([
+            uniqueIdentifier
+          ]);
+          //node.body.push.apply(node.body, [ promiseReturn ]);
+        }
       },
 
       LocalDestructorStatement(path) {
@@ -1557,6 +1613,77 @@ var compiler = {
         path.replaceWithMultiple(
           new ClassTransformer(path, state).run()
         );
+      },
+
+      AwaitStatement(path) {
+        if (!path.scope.block.async) {
+          console.log("man i gotta be some error")
+        }
+
+        const node = path.node;
+        const parent = path.parent
+        if (parent) {
+          if (parent.type == "LocalStatement") {
+            parent.init = [];
+          } else if (parent.type == "AssignmentStatement") {
+            path.parentPath.remove();
+          }
+        }
+
+        const uniqueIdentifier = generateLAUIdentifier(node, true, "result");
+        const errorIdentifier = generateLAUIdentifier(node, true, "error");
+        const body = [
+          b.assignmentStatement(
+            [ b.identifier(parent.variables[0].name) ],
+            [ uniqueIdentifier ]
+          )
+        ]
+        const funcExp = b.functionExpression([ uniqueIdentifier ], true, body)
+        const errorExp = b.functionExpression([ errorIdentifier ], true, [
+        ])
+        funcExp.async = true
+        const exp = b.callStatement(
+          b.memberExpression(
+            node.expression,
+            ":",
+            b.callExpression(
+              b.identifier("next"),
+              [
+                funcExp,
+                errorExp
+              ]
+            )
+          )
+        );
+        exp.async = true
+        exp.isBeingSearchedFor = true
+        path.parentPath.insertAfter(exp);
+
+        const len = path.scope.block.body.length;
+        let oldBody = [];
+        const newBody = [];
+        const maxLen = len - 2;
+        let hasFoundSearchedFor;
+        for (let i = 0; i < maxLen; i++) {
+          const entry = path.scope.block.body[i];
+          if (!hasFoundSearchedFor) {
+            if (entry.isBeingSearchedFor) {
+              hasFoundSearchedFor = i;
+              delete entry.isBeingSearchedFor;
+            }
+
+            oldBody.push(entry);
+          } else {
+            newBody.push(entry);
+          }
+        }
+        oldBody = [...oldBody, ...path.scope.block.body.slice(maxLen, len)];
+        path.scope.block.body = oldBody
+        //console.log(path.scope.block.body);
+        exp.expression.identifier.arguments[0].body = [
+          ...exp.expression.identifier.arguments[0].body,
+          ...newBody
+        ]
       },
 
       SuperExpression(path) {

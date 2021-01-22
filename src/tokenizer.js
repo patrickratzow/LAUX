@@ -816,7 +816,7 @@ function isKeyword(id) {
     case 4:
       return "else" === id || "goto" === id || "then" === id || "self" == id;
     case 5:
-      return "break" === id || "local" === id || "until" === id || "while" === id || "class" === id || "super" === id;
+      return "break" === id || "local" === id || "until" === id || "while" === id || "class" === id || "super" === id || "await" === id || "async" === id;
     case 6:
       return "elseif" === id || "repeat" === id || "return" === id || "static" === id || "public" === id || "stopif" === id;
     case 7:

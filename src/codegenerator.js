@@ -483,6 +483,9 @@ export default class CodeGenerator {
     ContinueIfStatement(node) {
       this.nodes.ShortcutIf.call(this, node, "continue")
     },
+    AwaitStatement(node) {
+      this.word("awaitOutput()")
+    }
   }
 
   _endsWithWord = false;

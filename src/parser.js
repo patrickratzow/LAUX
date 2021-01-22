@@ -437,6 +437,7 @@ function parseStatement() {
       case 'goto':     next(); return parseGotoStatement();
       case 'public':   next(); return parseClassStatement(true);
       case 'class':    next(); return parseClassStatement(false);
+      case 'async':    next(); return parseAsyncStatement();
       // Shortcuts
       case 'stopif':  next(); return parseStopIfStatement();
       case 'breakif':  next(); return parseBreakIfStatement();
@@ -456,6 +457,12 @@ function parseStatement() {
   if (consume(';')) return;
 
   return parseAssignmentOrCallStatement();
+}
+
+function parseAsyncStatement() {
+  expect("function")
+  var name = parseFunctionName();
+  return parseFunctionDeclaration(name, undefined, undefined, true);
 }
 
 // ## Statements
@@ -1071,7 +1078,8 @@ function parseSelfExpression() {
 //     funcdecl ::= '(' [parlist] ')' block 'end'
 //     parlist ::= Name {',' Name} | [',' '...'] | '...'
 
-function parseFunctionDeclaration(name, isLocal, isExpression) {
+
+function parseFunctionDeclaration(name, isLocal, isExpression, isAsync) {
   var parameters = [];
   expect('(');
 
@@ -1135,10 +1143,14 @@ function parseFunctionDeclaration(name, isLocal, isExpression) {
   isLocal = isLocal || false;
 
   if (isExpression) {
-    return finishNode(b.functionExpression(parameters, isLocal, body));
+    const node = b.functionExpression(parameters, isLocal, body)
+    node.async = isAsync;
+    return finishNode(node);
   }
   else {
-    return finishNode(b.functionDeclaration(name, parameters, isLocal, body));
+    const node = b.functionDeclaration(name, parameters, isLocal, body);
+    node.async = isAsync;
+    return finishNode(node);
   }
 }
 
@@ -1401,7 +1413,7 @@ function parsePrefixExpression() {
       base = parseSelfExpression();
       // Set the parent scope.
       if (options.scope) attachScope(base, scopeHasName(name));
-    }
+    } 
   }
   /*else if (consume('{')) {
     var variables = [];
@@ -1682,6 +1694,16 @@ function parsePrimaryExpression() {
     next();
     if (options.scope) createScope();
     return parseFunctionDeclaration(null, null, true);
+  } else if (Keyword == type && 'await' == value) {
+    if (scopeDepth == 1) {
+      raise(token, "Unable to use await in a global scope!");
+    }
+
+    pushLocation(marker);
+    next();
+
+    var exp = parseExpression();
+    return finishNode(b.awaitStatement(exp));
   } else if (consume('{')) {
     pushLocation(marker);
     return parseTableConstructor();

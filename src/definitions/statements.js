@@ -165,3 +165,9 @@ defineType("ContinueIfStatement", {
   builder: [ "arguments" ],
   aliases: [ "Statement" ]
 });
+
+defineType("AwaitStatement", {
+  visitors: [ "expression" ],
+  builder: [ "expression" ],
+  aliases: [ "Statement" ]
+});

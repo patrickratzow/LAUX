@@ -140,7 +140,11 @@ export default class FileHandler {
       for (const filePath of files) {
         const file = this.fileMap.get(filePath);
         if (file !== undefined) {
-          str += `do\r\n${file.getContent()}\r\nend\r\n------------ Split Break -------------\r\n`;
+          if (this.workspace.getAST()) {
+            str += file.getContent();
+          } else {
+            str += `do\r\n${file.getContent()}\r\nend\r\n------------ Split Break -------------\r\n`
+          }
         } else {
           console.log(chalk.magenta("LAUX") + " " +
             chalk.yellow("WARNING") + ` Unable to find ${filePath} file!`);
@@ -199,7 +203,7 @@ export default class FileHandler {
           console.log(e.stack);
         } else {
           console.log(chalk.magenta("LAUX") + " " +
-            chalk.red("ERROR") + ` ${fileName}:`);
+            chalk.red("ERROR") + ` ${fileName}.laux:`);
 
           console.log(chalk.magenta("LAUX") + " " +
             chalk.red("ERROR") + ` ${e.stack}`);
@@ -213,7 +217,13 @@ export default class FileHandler {
     const result = new CodeGenerator(compiledFile.code, compiledFile.compiledAST).generate();
 
     try {
-      jetpack.writeAsync(path.join(this.workspace.getAbsoluteOutput(), fileName + ".lua"), result.code);
+      const compiledPathNoExt = path.join(this.workspace.getAbsoluteOutput(), fileName);
+      if (this.workspace.getAST()) {
+        jetpack.writeAsync(compiledPathNoExt + ".ast.json", JSON.stringify(compiledFile.ast, null, 2));
+        jetpack.writeAsync(compiledPathNoExt + ".ast_compiled.json", JSON.stringify(compiledFile.compiledAST, null, 2));
+      }
+  
+      jetpack.writeAsync(compiledPathNoExt + ".lua", result.code);
     } catch (e) {
       console.error("Error: " + e.stack);
     }
@@ -261,7 +271,11 @@ export default class FileHandler {
         for (const filePath of files) {
           const file = this.fileMap.get(filePath);
           if (file !== undefined) {
-            str += `do\r\n${file.getContent()}\r\nend\r\n------------ Split Break -------------\r\n`
+            if (this.workspace.getAST()) {
+              str += file.getContent();
+            } else {
+              str += `do\r\n${file.getContent()}\r\nend\r\n------------ Split Break -------------\r\n`
+            }
           } else {
             console.log(chalk.magenta("LAUX") + " " +
               chalk.yellow("WARNING") + ` Unable to find ${filePath} file!`);

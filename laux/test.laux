@@ -1,0 +1,6 @@
+async function test(id)
+  local user = await User.find(id)
+  local onlineUsers = await User.findOnlineUsers()
+
+  return user, onlineUsers
+end
