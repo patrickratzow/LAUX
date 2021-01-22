@@ -1399,7 +1399,6 @@ var compiler = {
                 )
               ]
             )
-  
 
             let compareParam  = b.logicalExpression(
               "==", 
@@ -1474,47 +1473,48 @@ var compiler = {
             }
             foundAt = i;
           }
-          const insertNode = b.returnStatement([
-            b.callExpression(
+          
+          if (node.blockAsync) {
+            const insertNode = b.returnStatement([ b.callExpression(
               b.memberExpression(
                 uniqueIdentifier,
                 ":",
                 b.identifier("resolve")
               ),
               existingReturn
-            )
-          ]);
+            )])
           
-          if (foundAt !== -1) {
-            node.body[foundAt] = insertNode;
-          } else {
-            node.body.push.apply(node.body, [ insertNode ]);
-          }
+            if (foundAt !== -1) {
+              node.body[foundAt] = insertNode;
+            } else {
+              node.body.push.apply(node.body, [ insertNode ]);
+            }
 
-          const promiseInit = b.localStatement(
-            [
-              uniqueIdentifier
-            ],
-            [
-              b.callExpression(
-                b.memberExpression(
-                  b.identifier("XeninUI"),
-                  ".",
+            const promiseInit = b.localStatement(
+              [
+                uniqueIdentifier
+              ],
+              [
+                b.callExpression(
                   b.memberExpression(
-                    b.identifier("Promises"),
+                    b.identifier("XeninUI"),
                     ".",
-                    b.identifier("new")
+                    b.memberExpression(
+                      b.identifier("Promises"),
+                      ".",
+                      b.identifier("new")
+                    )
                   )
                 )
-              )
-            ]
-          );
-          node.body.unshift.apply(node.body, [ promiseInit ]);
-
-          const promiseReturn = b.returnStatement([
-            uniqueIdentifier
-          ]);
-          //node.body.push.apply(node.body, [ promiseReturn ]);
+              ]
+            );
+            node.body.unshift.apply(node.body, [ promiseInit ]);
+            const promiseReturn = b.returnStatement([
+              uniqueIdentifier,
+            ]);
+            promiseReturn.asyncBlockReturn = true
+            //node.body.push.apply(node.body, [ promiseReturn ]);
+          }
         }
       },
 
@@ -1617,9 +1617,9 @@ var compiler = {
 
       AwaitStatement(path) {
         if (!path.scope.block.async) {
-          console.log("man i gotta be some error")
+          throw new Error("Unable to use await outside an async scope")
         }
-
+        
         const node = path.node;
         const parent = path.parent
         if (parent) {
@@ -1640,6 +1640,7 @@ var compiler = {
         ]
         const funcExp = b.functionExpression([ uniqueIdentifier ], true, body)
         const errorExp = b.functionExpression([ errorIdentifier ], true, [
+          b.callExpression(b.identifier("__laux__replace__me"), [ errorIdentifier ])
         ])
         funcExp.async = true
         const exp = b.callStatement(
@@ -1657,15 +1658,19 @@ var compiler = {
         );
         exp.async = true
         exp.isBeingSearchedFor = true
+        exp.hasErrorAsync = true
         path.parentPath.insertAfter(exp);
 
+        const stop = 0
+        if (stop) return
         const len = path.scope.block.body.length;
+        const block = path.scope.block;
         let oldBody = [];
         const newBody = [];
-        const maxLen = len - 2;
+        const maxLen = len - 0;
         let hasFoundSearchedFor;
         for (let i = 0; i < maxLen; i++) {
-          const entry = path.scope.block.body[i];
+          const entry = block.body[i];
           if (!hasFoundSearchedFor) {
             if (entry.isBeingSearchedFor) {
               hasFoundSearchedFor = i;
@@ -1677,13 +1682,43 @@ var compiler = {
             newBody.push(entry);
           }
         }
-        oldBody = [...oldBody, ...path.scope.block.body.slice(maxLen, len)];
+
+        let mergeBody
+        let identifierResolve = path.scope.block.body.slice(maxLen - 1, len)[0].arguments[0].base.base
+        if (path.scope.block.blockAsync) {
+          mergeBody = path.scope.block.body.slice(maxLen - 1, len);
+          mergeBody = [ 
+            b.returnStatement([ 
+              mergeBody[0].arguments[0].base.base
+            ])
+          ]
+        } else {
+          mergeBody = path.scope.block.body.slice(maxLen, len);
+        }
+        
+        oldBody = [...oldBody, ...mergeBody];
         path.scope.block.body = oldBody
-        //console.log(path.scope.block.body);
         exp.expression.identifier.arguments[0].body = [
           ...exp.expression.identifier.arguments[0].body,
           ...newBody
         ]
+
+        for (let i = 0; i < path.scope.block.body.length; i++) {
+          const entry = path.scope.block.body[i];
+          if (entry.type === "CallStatement" && entry.hasErrorAsync) {
+            const errorIdentifier = entry.expression.identifier.arguments[1].body[0].arguments[0]
+            entry.expression.identifier.arguments[1].body[0] = b.returnStatement([
+              b.callExpression(
+                b.memberExpression(
+                  b.identifier(identifierResolve.name),
+                  ":",
+                  b.identifier("reject")
+                ),
+                [ errorIdentifier ]
+              )
+            ])
+          }
+        }
       },
 
       SuperExpression(path) {

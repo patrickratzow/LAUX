@@ -515,6 +515,8 @@ export default class ClassTransformer {
     this.userMethods.push(node);
 
     var exp = b.functionExpression(params, true, node.body);
+    exp.async = node.async;
+    exp.blockAsync = node.async;
     if (node.isStatic) {
       this.staticMembers.push({
         identifier: node.identifier,

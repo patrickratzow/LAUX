@@ -1,6 +1,11 @@
-async function test(id)
-  local user = await User.find(id)
-  local onlineUsers = await User.findOnlineUsers()
+class Users
+  static async find(id)
+    return { money = 500 }-- we pretend for science
+  end
+end
 
-  return user, onlineUsers
+async function hasMoney(sid64, amt)
+  local { money } = await Users.find(sid64)
+
+  return (money || 0) > amt
 end

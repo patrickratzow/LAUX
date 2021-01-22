@@ -134,7 +134,7 @@ defineType("ClassStatement", {
 
 defineType("ClassMethodStatement", {
   visitors: [ "identifier", "parameters", "body" ],
-  builder: [ "identifier", "kind", "parameters", "body", "isStatic" ],
+  builder: [ "identifier", "kind", "parameters", "body", "isStatic", "async" ],
   aliases: [ "Statement", "Scopable" ]
 });
 

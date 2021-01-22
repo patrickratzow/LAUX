@@ -782,6 +782,7 @@ function parseClassBodyStatement() {
 
   
   if (token.value == 'constructor') classConstructorToken = token;
+  let isAsync = consume("async");
   let expression = parseIdentifier();
   let isConstructor = expression.name === 'constructor';
 
@@ -806,7 +807,7 @@ function parseClassBodyStatement() {
     if (isConstructor) isInClassConstructor = true;
     isInClassMethod = true;
 
-    statement = parseClassMethodStatement(expression, isStatic, isConstructor);
+    statement = parseClassMethodStatement(expression, isStatic, isConstructor, isAsync);
 
     isInClassMethod = false;
     isInClassConstructor = false;
@@ -817,7 +818,7 @@ function parseClassBodyStatement() {
   return finishNode(statement);
 }
 
-function parseClassMethodStatement(expression, isStatic, isConstructor) {
+function parseClassMethodStatement(expression, isStatic, isConstructor, async) {
   var marker;
   var parameters = [];
 
@@ -868,10 +869,10 @@ function parseClassMethodStatement(expression, isStatic, isConstructor) {
   if (options.scope) destroyScope();
 
   if (isConstructor) {
-    return finishNode(b.classMethodStatement(expression, "constructor", parameters, body, false));
+    return finishNode(b.classMethodStatement(expression, "constructor", parameters, body, false, async));
   }
 
-  return finishNode(b.classMethodStatement(expression, "method", parameters, body, isStatic));
+  return finishNode(b.classMethodStatement(expression, "method", parameters, body, isStatic, async));
 }
 
 // Local statements can either be variable assignments or function
@@ -941,7 +942,19 @@ function parseLocalStatement() {
       return finishNode(b.localStatement(variables, init));
     }
   }
-  if (consume('function')) {
+  if (consume("async")) {
+    next();
+
+    name = parseIdentifier();
+    if (options.scope) {
+      scopeIdentifier(name);
+      createScope();
+    }
+
+    // MemberExpressions are not allowed in local function statements.
+    return parseFunctionDeclaration(name, true, undefined, true);
+  }
+  else if (consume('function')) {
     name = parseIdentifier();
 
     if (options.scope) {
@@ -1145,11 +1158,13 @@ function parseFunctionDeclaration(name, isLocal, isExpression, isAsync) {
   if (isExpression) {
     const node = b.functionExpression(parameters, isLocal, body)
     node.async = isAsync;
+    node.blockAsync = isAsync;
     return finishNode(node);
   }
   else {
     const node = b.functionDeclaration(name, parameters, isLocal, body);
     node.async = isAsync;
+    node.blockAsync = isAsync;
     return finishNode(node);
   }
 }

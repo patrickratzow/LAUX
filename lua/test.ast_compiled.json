@@ -4,44 +4,572 @@
     "type": "Chunk",
     "body": [
       {
+        "type": "LocalStatement",
+        "variables": [
+          {
+            "type": "Identifier",
+            "name": "Users",
+            "isLocal": true,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 6
+              },
+              "end": {
+                "line": 1,
+                "column": 11
+              }
+            },
+            "range": [
+              6,
+              11
+            ]
+          }
+        ],
+        "init": []
+      },
+      {
+        "type": "DoStatement",
+        "body": [
+          {
+            "type": "LocalStatement",
+            "variables": [
+              {
+                "type": "Identifier",
+                "name": "_class_0",
+                "isLocal": true
+              }
+            ],
+            "init": []
+          },
+          {
+            "type": "LocalStatement",
+            "variables": [
+              {
+                "type": "Identifier",
+                "name": "_base_0",
+                "isLocal": true
+              }
+            ],
+            "init": [
+              {
+                "type": "TableConstructorExpression",
+                "fields": [
+                  {
+                    "type": "TableKeyString",
+                    "key": {
+                      "type": "Identifier",
+                      "name": "__name"
+                    },
+                    "value": {
+                      "type": "StringLiteral",
+                      "value": "Users",
+                      "raw": "\"Users\""
+                    }
+                  },
+                  {
+                    "type": "TableKeyString",
+                    "key": {
+                      "type": "Identifier",
+                      "name": "__type"
+                    },
+                    "value": {
+                      "type": "FunctionExpression",
+                      "parameters": [
+                        {
+                          "type": "SelfExpression"
+                        }
+                      ],
+                      "isLocal": true,
+                      "body": [
+                        {
+                          "type": "ReturnStatement",
+                          "arguments": [
+                            {
+                              "type": "MemberExpression",
+                              "base": {
+                                "type": "SelfExpression"
+                              },
+                              "indexer": ".",
+                              "identifier": {
+                                "type": "Identifier",
+                                "name": "__name"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "AssignmentStatement",
+            "variables": [
+              {
+                "type": "MemberExpression",
+                "base": {
+                  "type": "Identifier",
+                  "name": "_base_0",
+                  "isLocal": true
+                },
+                "indexer": ".",
+                "identifier": {
+                  "type": "Identifier",
+                  "name": "__index"
+                }
+              }
+            ],
+            "init": [
+              {
+                "type": "Identifier",
+                "name": "_base_0",
+                "isLocal": true
+              }
+            ]
+          },
+          {
+            "type": "AssignmentStatement",
+            "variables": [
+              {
+                "type": "Identifier",
+                "name": "_class_0",
+                "isLocal": true
+              }
+            ],
+            "init": [
+              {
+                "type": "CallExpression",
+                "base": {
+                  "type": "Identifier",
+                  "name": "setmetatable"
+                },
+                "arguments": [
+                  {
+                    "type": "TableConstructorExpression",
+                    "fields": [
+                      {
+                        "type": "TableKeyString",
+                        "key": {
+                          "type": "Identifier",
+                          "name": "__init"
+                        },
+                        "value": {
+                          "type": "FunctionExpression",
+                          "parameters": [
+                            {
+                              "type": "SelfExpression"
+                            }
+                          ],
+                          "isLocal": true,
+                          "body": []
+                        }
+                      },
+                      {
+                        "type": "TableKeyString",
+                        "key": {
+                          "type": "Identifier",
+                          "name": "__base"
+                        },
+                        "value": {
+                          "type": "Identifier",
+                          "name": "_base_0",
+                          "isLocal": true
+                        }
+                      },
+                      {
+                        "type": "TableKeyString",
+                        "key": {
+                          "type": "Identifier",
+                          "name": "find",
+                          "loc": {
+                            "start": {
+                              "line": 2,
+                              "column": 15
+                            },
+                            "end": {
+                              "line": 2,
+                              "column": 19
+                            }
+                          },
+                          "range": [
+                            28,
+                            32
+                          ]
+                        },
+                        "value": {
+                          "type": "FunctionExpression",
+                          "parameters": [
+                            {
+                              "type": "Identifier",
+                              "name": "id",
+                              "isLocal": true,
+                              "loc": {
+                                "start": {
+                                  "line": 2,
+                                  "column": 20
+                                },
+                                "end": {
+                                  "line": 2,
+                                  "column": 22
+                                }
+                              },
+                              "range": [
+                                33,
+                                35
+                              ]
+                            }
+                          ],
+                          "isLocal": true,
+                          "body": [
+                            {
+                              "type": "LocalStatement",
+                              "variables": [
+                                {
+                                  "type": "Identifier",
+                                  "name": "__laux_promise_5",
+                                  "isLocal": true
+                                }
+                              ],
+                              "init": [
+                                {
+                                  "type": "CallExpression",
+                                  "base": {
+                                    "type": "MemberExpression",
+                                    "base": {
+                                      "type": "Identifier",
+                                      "name": "XeninUI"
+                                    },
+                                    "indexer": ".",
+                                    "identifier": {
+                                      "type": "MemberExpression",
+                                      "base": {
+                                        "type": "Identifier",
+                                        "name": "Promises"
+                                      },
+                                      "indexer": ".",
+                                      "identifier": {
+                                        "type": "Identifier",
+                                        "name": "new"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "type": "ReturnStatement",
+                              "arguments": [
+                                {
+                                  "type": "CallExpression",
+                                  "base": {
+                                    "type": "MemberExpression",
+                                    "base": {
+                                      "type": "Identifier",
+                                      "name": "__laux_promise_5",
+                                      "isLocal": true
+                                    },
+                                    "indexer": ":",
+                                    "identifier": {
+                                      "type": "Identifier",
+                                      "name": "resolve"
+                                    }
+                                  },
+                                  "arguments": [
+                                    {
+                                      "type": "TableConstructorExpression",
+                                      "fields": [
+                                        {
+                                          "type": "TableKeyString",
+                                          "key": {
+                                            "type": "Identifier",
+                                            "name": "money",
+                                            "loc": {
+                                              "start": {
+                                                "line": 3,
+                                                "column": 13
+                                              },
+                                              "end": {
+                                                "line": 3,
+                                                "column": 18
+                                              }
+                                            },
+                                            "range": [
+                                              51,
+                                              56
+                                            ]
+                                          },
+                                          "value": {
+                                            "type": "NumericLiteral",
+                                            "value": 500,
+                                            "raw": "500",
+                                            "loc": {
+                                              "start": {
+                                                "line": 3,
+                                                "column": 21
+                                              },
+                                              "end": {
+                                                "line": 3,
+                                                "column": 24
+                                              }
+                                            },
+                                            "range": [
+                                              59,
+                                              62
+                                            ]
+                                          },
+                                          "loc": {
+                                            "start": {
+                                              "line": 3,
+                                              "column": 13
+                                            },
+                                            "end": {
+                                              "line": 3,
+                                              "column": 24
+                                            }
+                                          },
+                                          "range": [
+                                            51,
+                                            62
+                                          ]
+                                        }
+                                      ],
+                                      "loc": {
+                                        "start": {
+                                          "line": 3,
+                                          "column": 11
+                                        },
+                                        "end": {
+                                          "line": 3,
+                                          "column": 26
+                                        }
+                                      },
+                                      "range": [
+                                        49,
+                                        64
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "async": true,
+                          "blockAsync": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "TableConstructorExpression",
+                    "fields": [
+                      {
+                        "type": "TableKeyString",
+                        "key": {
+                          "type": "Identifier",
+                          "name": "__index"
+                        },
+                        "value": {
+                          "type": "Identifier",
+                          "name": "_base_0",
+                          "isLocal": true
+                        }
+                      },
+                      {
+                        "type": "TableKeyString",
+                        "key": {
+                          "type": "Identifier",
+                          "name": "__call"
+                        },
+                        "value": {
+                          "type": "FunctionExpression",
+                          "parameters": [
+                            {
+                              "type": "Identifier",
+                              "name": "cls",
+                              "isLocal": true
+                            },
+                            {
+                              "type": "VarargLiteral",
+                              "value": "...",
+                              "raw": "..."
+                            }
+                          ],
+                          "isLocal": true,
+                          "body": [
+                            {
+                              "type": "LocalStatement",
+                              "variables": [
+                                {
+                                  "type": "Identifier",
+                                  "name": "_self_0",
+                                  "isLocal": true
+                                }
+                              ],
+                              "init": [
+                                {
+                                  "type": "CallExpression",
+                                  "base": {
+                                    "type": "Identifier",
+                                    "name": "setmetatable"
+                                  },
+                                  "arguments": [
+                                    {
+                                      "type": "TableConstructorExpression",
+                                      "fields": []
+                                    },
+                                    {
+                                      "type": "Identifier",
+                                      "name": "_base_0",
+                                      "isLocal": true
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "CallStatement",
+                              "expression": {
+                                "type": "CallExpression",
+                                "base": {
+                                  "type": "MemberExpression",
+                                  "base": {
+                                    "type": "Identifier",
+                                    "name": "cls",
+                                    "isLocal": true
+                                  },
+                                  "indexer": ".",
+                                  "identifier": {
+                                    "type": "Identifier",
+                                    "name": "__init"
+                                  }
+                                },
+                                "arguments": [
+                                  {
+                                    "type": "Identifier",
+                                    "name": "_self_0",
+                                    "isLocal": true
+                                  },
+                                  {
+                                    "type": "VarargLiteral",
+                                    "value": "...",
+                                    "raw": "..."
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "type": "ReturnStatement",
+                              "arguments": [
+                                {
+                                  "type": "Identifier",
+                                  "name": "_self_0",
+                                  "isLocal": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "AssignmentStatement",
+            "variables": [
+              {
+                "type": "Identifier",
+                "name": "Users",
+                "isLocal": true,
+                "loc": {
+                  "start": {
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 11
+                  }
+                },
+                "range": [
+                  6,
+                  11
+                ]
+              }
+            ],
+            "init": [
+              {
+                "type": "Identifier",
+                "name": "_class_0",
+                "isLocal": true
+              }
+            ]
+          }
+        ]
+      },
+      {
         "type": "FunctionDeclaration",
         "identifier": {
           "type": "Identifier",
-          "name": "test",
+          "name": "hasMoney",
           "isLocal": false,
           "loc": {
             "start": {
-              "line": 1,
+              "line": 7,
               "column": 15
             },
             "end": {
-              "line": 1,
-              "column": 19
+              "line": 7,
+              "column": 23
             }
           },
           "range": [
-            15,
-            19
+            120,
+            128
           ]
         },
         "parameters": [
           {
             "type": "Identifier",
-            "name": "id",
+            "name": "sid64",
             "isLocal": true,
             "loc": {
               "start": {
-                "line": 1,
-                "column": 20
+                "line": 7,
+                "column": 24
               },
               "end": {
-                "line": 1,
-                "column": 22
+                "line": 7,
+                "column": 29
               }
             },
             "range": [
-              20,
-              22
+              129,
+              134
+            ]
+          },
+          {
+            "type": "Identifier",
+            "name": "amt",
+            "isLocal": true,
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 31
+              },
+              "end": {
+                "line": 7,
+                "column": 34
+              }
+            },
+            "range": [
+              136,
+              139
             ]
           }
         ],
@@ -87,39 +615,11 @@
             "variables": [
               {
                 "type": "Identifier",
-                "name": "user",
-                "isLocal": true,
-                "loc": {
-                  "start": {
-                    "line": 2,
-                    "column": 8
-                  },
-                  "end": {
-                    "line": 2,
-                    "column": 12
-                  }
-                },
-                "range": [
-                  33,
-                  37
-                ]
+                "name": "__lauxi1",
+                "isLocal": true
               }
             ],
-            "init": [],
-            "loc": {
-              "start": {
-                "line": 2,
-                "column": 2
-              },
-              "end": {
-                "line": 2,
-                "column": 34
-              }
-            },
-            "range": [
-              27,
-              59
-            ]
+            "init": []
           },
           {
             "type": "CallStatement",
@@ -131,21 +631,21 @@
                   "type": "MemberExpression",
                   "base": {
                     "type": "Identifier",
-                    "name": "User",
-                    "isLocal": false,
+                    "name": "Users",
+                    "isLocal": true,
                     "loc": {
                       "start": {
-                        "line": 2,
-                        "column": 21
+                        "line": 8,
+                        "column": 26
                       },
                       "end": {
-                        "line": 2,
-                        "column": 25
+                        "line": 8,
+                        "column": 31
                       }
                     },
                     "range": [
-                      46,
-                      50
+                      168,
+                      173
                     ]
                   },
                   "indexer": ".",
@@ -154,68 +654,68 @@
                     "name": "find",
                     "loc": {
                       "start": {
-                        "line": 2,
-                        "column": 26
+                        "line": 8,
+                        "column": 32
                       },
                       "end": {
-                        "line": 2,
-                        "column": 30
+                        "line": 8,
+                        "column": 36
                       }
                     },
                     "range": [
-                      51,
-                      55
+                      174,
+                      178
                     ]
                   },
                   "loc": {
                     "start": {
-                      "line": 2,
-                      "column": 21
+                      "line": 8,
+                      "column": 26
                     },
                     "end": {
-                      "line": 2,
-                      "column": 34
+                      "line": 8,
+                      "column": 43
                     }
                   },
                   "range": [
-                    46,
-                    59
+                    168,
+                    185
                   ]
                 },
                 "arguments": [
                   {
                     "type": "Identifier",
-                    "name": "id",
+                    "name": "sid64",
                     "isLocal": true,
                     "loc": {
                       "start": {
-                        "line": 2,
-                        "column": 31
+                        "line": 8,
+                        "column": 37
                       },
                       "end": {
-                        "line": 2,
-                        "column": 33
+                        "line": 8,
+                        "column": 42
                       }
                     },
                     "range": [
-                      56,
-                      58
+                      179,
+                      184
                     ]
                   }
                 ],
                 "loc": {
                   "start": {
-                    "line": 2,
-                    "column": 21
+                    "line": 8,
+                    "column": 26
                   },
                   "end": {
-                    "line": 2,
-                    "column": 34
+                    "line": 8,
+                    "column": 43
                   }
                 },
                 "range": [
-                  46,
-                  59
+                  168,
+                  185
                 ]
               },
               "indexer": ":",
@@ -231,60 +731,110 @@
                     "parameters": [
                       {
                         "type": "Identifier",
-                        "name": "__laux_result_1",
+                        "name": "__laux_result_2",
                         "isLocal": true
                       }
                     ],
                     "isLocal": true,
                     "body": [
                       {
-                        "type": "LocalStatement",
-                        "variables": [
-                          {
-                            "type": "Identifier",
-                            "name": "__laux_promise_5",
-                            "isLocal": true
-                          }
-                        ],
-                        "init": [
-                          {
-                            "type": "CallExpression",
-                            "base": {
-                              "type": "MemberExpression",
-                              "base": {
-                                "type": "Identifier",
-                                "name": "XeninUI"
-                              },
-                              "indexer": ".",
-                              "identifier": {
-                                "type": "MemberExpression",
-                                "base": {
-                                  "type": "Identifier",
-                                  "name": "Promises"
-                                },
-                                "indexer": ".",
-                                "identifier": {
-                                  "type": "Identifier",
-                                  "name": "new"
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
                         "type": "AssignmentStatement",
                         "variables": [
                           {
                             "type": "Identifier",
-                            "name": "user"
+                            "name": "__lauxi1"
                           }
                         ],
                         "init": [
                           {
                             "type": "Identifier",
-                            "name": "__laux_result_1",
+                            "name": "__laux_result_2",
                             "isLocal": true
+                          }
+                        ]
+                      },
+                      {
+                        "type": "CallStatement",
+                        "expression": {
+                          "type": "CallExpression",
+                          "base": {
+                            "type": "Identifier",
+                            "name": "assert"
+                          },
+                          "arguments": [
+                            {
+                              "type": "BinaryExpression",
+                              "operator": "~=",
+                              "left": {
+                                "type": "Identifier",
+                                "name": "__lauxi1",
+                                "isLocal": true
+                              },
+                              "right": {
+                                "type": "NilLiteral",
+                                "value": null,
+                                "raw": "nil"
+                              }
+                            },
+                            {
+                              "type": "StringLiteral",
+                              "value": "cannot destructure nil value",
+                              "raw": "\"cannot destructure nil value\""
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "LocalStatement",
+                        "variables": [
+                          {
+                            "type": "Identifier",
+                            "name": "money",
+                            "isLocal": true,
+                            "loc": {
+                              "start": {
+                                "line": 8,
+                                "column": 10
+                              },
+                              "end": {
+                                "line": 8,
+                                "column": 15
+                              }
+                            },
+                            "range": [
+                              152,
+                              157
+                            ]
+                          }
+                        ],
+                        "init": [
+                          {
+                            "type": "MemberExpression",
+                            "base": {
+                              "type": "Identifier",
+                              "name": "__lauxi1",
+                              "isLocal": true
+                            },
+                            "indexer": ".",
+                            "identifier": {
+                              "type": "Identifier",
+                              "name": "money",
+                              "isLocal": true,
+                              "loc": {
+                                "start": {
+                                  "line": 8,
+                                  "column": 10
+                                },
+                                "end": {
+                                  "line": 8,
+                                  "column": 15
+                                }
+                              },
+                              "range": [
+                                152,
+                                157
+                              ]
+                            }
                           }
                         ]
                       },
@@ -297,7 +847,7 @@
                               "type": "MemberExpression",
                               "base": {
                                 "type": "Identifier",
-                                "name": "__laux_promise_5",
+                                "name": "__laux_promise_0",
                                 "isLocal": true
                               },
                               "indexer": ":",
@@ -306,7 +856,102 @@
                                 "name": "resolve"
                               }
                             },
-                            "arguments": []
+                            "arguments": [
+                              {
+                                "type": "BinaryExpression",
+                                "operator": ">",
+                                "left": {
+                                  "type": "BinaryExpression",
+                                  "operator": "||",
+                                  "left": {
+                                    "type": "Identifier",
+                                    "name": "money",
+                                    "isLocal": true,
+                                    "loc": {
+                                      "start": {
+                                        "line": 10,
+                                        "column": 10
+                                      },
+                                      "end": {
+                                        "line": 10,
+                                        "column": 15
+                                      }
+                                    },
+                                    "range": [
+                                      199,
+                                      204
+                                    ]
+                                  },
+                                  "right": {
+                                    "type": "NumericLiteral",
+                                    "value": 0,
+                                    "raw": "0",
+                                    "loc": {
+                                      "start": {
+                                        "line": 10,
+                                        "column": 19
+                                      },
+                                      "end": {
+                                        "line": 10,
+                                        "column": 20
+                                      }
+                                    },
+                                    "range": [
+                                      208,
+                                      209
+                                    ]
+                                  },
+                                  "loc": {
+                                    "start": {
+                                      "line": 10,
+                                      "column": 10
+                                    },
+                                    "end": {
+                                      "line": 10,
+                                      "column": 20
+                                    }
+                                  },
+                                  "range": [
+                                    199,
+                                    209
+                                  ],
+                                  "inParens": true
+                                },
+                                "right": {
+                                  "type": "Identifier",
+                                  "name": "amt",
+                                  "isLocal": true,
+                                  "loc": {
+                                    "start": {
+                                      "line": 10,
+                                      "column": 24
+                                    },
+                                    "end": {
+                                      "line": 10,
+                                      "column": 27
+                                    }
+                                  },
+                                  "range": [
+                                    213,
+                                    216
+                                  ]
+                                },
+                                "loc": {
+                                  "start": {
+                                    "line": 10,
+                                    "column": 9
+                                  },
+                                  "end": {
+                                    "line": 10,
+                                    "column": 27
+                                  }
+                                },
+                                "range": [
+                                  198,
+                                  216
+                                ]
+                              }
+                            ]
                           }
                         ]
                       }
@@ -318,204 +963,12 @@
                     "parameters": [
                       {
                         "type": "Identifier",
-                        "name": "__laux_error_2",
-                        "isLocal": true
-                      }
-                    ],
-                    "isLocal": true,
-                    "body": []
-                  }
-                ]
-              }
-            },
-            "async": true
-          },
-          {
-            "type": "LocalStatement",
-            "variables": [
-              {
-                "type": "Identifier",
-                "name": "onlineUsers",
-                "isLocal": true,
-                "loc": {
-                  "start": {
-                    "line": 3,
-                    "column": 8
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 19
-                  }
-                },
-                "range": [
-                  69,
-                  80
-                ]
-              }
-            ],
-            "init": [],
-            "loc": {
-              "start": {
-                "line": 3,
-                "column": 2
-              },
-              "end": {
-                "line": 3,
-                "column": 50
-              }
-            },
-            "range": [
-              63,
-              111
-            ]
-          },
-          {
-            "type": "CallStatement",
-            "expression": {
-              "type": "MemberExpression",
-              "base": {
-                "type": "CallExpression",
-                "base": {
-                  "type": "MemberExpression",
-                  "base": {
-                    "type": "Identifier",
-                    "name": "User",
-                    "isLocal": false,
-                    "loc": {
-                      "start": {
-                        "line": 3,
-                        "column": 28
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 32
-                      }
-                    },
-                    "range": [
-                      89,
-                      93
-                    ]
-                  },
-                  "indexer": ".",
-                  "identifier": {
-                    "type": "Identifier",
-                    "name": "findOnlineUsers",
-                    "loc": {
-                      "start": {
-                        "line": 3,
-                        "column": 33
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 48
-                      }
-                    },
-                    "range": [
-                      94,
-                      109
-                    ]
-                  },
-                  "loc": {
-                    "start": {
-                      "line": 3,
-                      "column": 28
-                    },
-                    "end": {
-                      "line": 3,
-                      "column": 50
-                    }
-                  },
-                  "range": [
-                    89,
-                    111
-                  ]
-                },
-                "arguments": [],
-                "loc": {
-                  "start": {
-                    "line": 3,
-                    "column": 28
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 50
-                  }
-                },
-                "range": [
-                  89,
-                  111
-                ]
-              },
-              "indexer": ":",
-              "identifier": {
-                "type": "CallExpression",
-                "base": {
-                  "type": "Identifier",
-                  "name": "next"
-                },
-                "arguments": [
-                  {
-                    "type": "FunctionExpression",
-                    "parameters": [
-                      {
-                        "type": "Identifier",
-                        "name": "__laux_result_3",
+                        "name": "__laux_error_3",
                         "isLocal": true
                       }
                     ],
                     "isLocal": true,
                     "body": [
-                      {
-                        "type": "LocalStatement",
-                        "variables": [
-                          {
-                            "type": "Identifier",
-                            "name": "__laux_promise_6",
-                            "isLocal": true
-                          }
-                        ],
-                        "init": [
-                          {
-                            "type": "CallExpression",
-                            "base": {
-                              "type": "MemberExpression",
-                              "base": {
-                                "type": "Identifier",
-                                "name": "XeninUI"
-                              },
-                              "indexer": ".",
-                              "identifier": {
-                                "type": "MemberExpression",
-                                "base": {
-                                  "type": "Identifier",
-                                  "name": "Promises"
-                                },
-                                "indexer": ".",
-                                "identifier": {
-                                  "type": "Identifier",
-                                  "name": "new"
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "type": "AssignmentStatement",
-                        "variables": [
-                          {
-                            "type": "Identifier",
-                            "name": "onlineUsers"
-                          }
-                        ],
-                        "init": [
-                          {
-                            "type": "Identifier",
-                            "name": "__laux_result_3",
-                            "isLocal": true
-                          }
-                        ]
-                      },
                       {
                         "type": "ReturnStatement",
                         "arguments": [
@@ -525,116 +978,58 @@
                               "type": "MemberExpression",
                               "base": {
                                 "type": "Identifier",
-                                "name": "__laux_promise_6",
-                                "isLocal": true
+                                "name": "__laux_promise_0"
                               },
                               "indexer": ":",
                               "identifier": {
                                 "type": "Identifier",
-                                "name": "resolve"
+                                "name": "reject"
                               }
                             },
-                            "arguments": []
+                            "arguments": [
+                              {
+                                "type": "Identifier",
+                                "name": "__laux_error_3",
+                                "isLocal": true
+                              }
+                            ]
                           }
                         ]
                       }
-                    ],
-                    "async": true
-                  },
-                  {
-                    "type": "FunctionExpression",
-                    "parameters": [
-                      {
-                        "type": "Identifier",
-                        "name": "__laux_error_4",
-                        "isLocal": true
-                      }
-                    ],
-                    "isLocal": true,
-                    "body": []
+                    ]
                   }
                 ]
               }
             },
             "async": true,
-            "isBeingSearchedFor": true
+            "hasErrorAsync": true
           },
           {
             "type": "ReturnStatement",
             "arguments": [
               {
-                "type": "CallExpression",
-                "base": {
-                  "type": "MemberExpression",
-                  "base": {
-                    "type": "Identifier",
-                    "name": "__laux_promise_0",
-                    "isLocal": true
-                  },
-                  "indexer": ":",
-                  "identifier": {
-                    "type": "Identifier",
-                    "name": "resolve"
-                  }
-                },
-                "arguments": [
-                  {
-                    "type": "Identifier",
-                    "name": "user",
-                    "isLocal": true,
-                    "loc": {
-                      "start": {
-                        "line": 5,
-                        "column": 9
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 13
-                      }
-                    },
-                    "range": [
-                      124,
-                      128
-                    ]
-                  },
-                  {
-                    "type": "Identifier",
-                    "name": "onlineUsers",
-                    "isLocal": true,
-                    "loc": {
-                      "start": {
-                        "line": 5,
-                        "column": 15
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 26
-                      }
-                    },
-                    "range": [
-                      130,
-                      141
-                    ]
-                  }
-                ]
+                "type": "Identifier",
+                "name": "__laux_promise_0",
+                "isLocal": true
               }
             ]
           }
         ],
         "async": true,
+        "blockAsync": true,
         "loc": {
           "start": {
-            "line": 1,
+            "line": 7,
             "column": 0
           },
           "end": {
-            "line": 6,
+            "line": 11,
             "column": 3
           }
         },
         "range": [
-          0,
-          146
+          105,
+          221
         ]
       }
     ],
@@ -644,13 +1039,13 @@
         "column": 0
       },
       "end": {
-        "line": 6,
+        "line": 11,
         "column": 3
       }
     },
     "range": [
       0,
-      146
+      221
     ]
   },
   "loc": {
@@ -659,58 +1054,58 @@
       "column": 0
     },
     "end": {
-      "line": 6,
+      "line": 11,
       "column": 3
     }
   },
   "range": [
     0,
-    146
+    221
   ],
   "globals": [
     {
       "type": "Identifier",
-      "name": "test",
-      "isLocal": false,
+      "name": "Users",
+      "isLocal": true,
       "loc": {
         "start": {
           "line": 1,
-          "column": 15
+          "column": 6
         },
         "end": {
           "line": 1,
-          "column": 19
+          "column": 11
         }
       },
       "range": [
-        15,
-        19
+        6,
+        11
       ]
     },
     {
       "type": "Identifier",
-      "name": "User",
+      "name": "hasMoney",
       "isLocal": false,
       "loc": {
         "start": {
-          "line": 2,
-          "column": 21
+          "line": 7,
+          "column": 15
         },
         "end": {
-          "line": 2,
-          "column": 25
+          "line": 7,
+          "column": 23
         }
       },
       "range": [
-        46,
-        50
+        120,
+        128
       ]
     }
   ],
   "tokens": [
     {
       "type": "Keyword",
-      "value": "async",
+      "value": "class",
       "range": [
         0,
         5
@@ -727,11 +1122,11 @@
       }
     },
     {
-      "type": "Keyword",
-      "value": "function",
+      "type": "Identifier",
+      "value": "Users",
       "range": [
         6,
-        14
+        11
       ],
       "loc": {
         "start": {
@@ -740,88 +1135,16 @@
         },
         "end": {
           "line": 1,
-          "column": 14
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "test",
-      "range": [
-        15,
-        19
-      ],
-      "loc": {
-        "start": {
-          "line": 1,
-          "column": 15
-        },
-        "end": {
-          "line": 1,
-          "column": 19
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": "(",
-      "range": [
-        19,
-        20
-      ],
-      "loc": {
-        "start": {
-          "line": 1,
-          "column": 19
-        },
-        "end": {
-          "line": 1,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "id",
-      "range": [
-        20,
-        22
-      ],
-      "loc": {
-        "start": {
-          "line": 1,
-          "column": 20
-        },
-        "end": {
-          "line": 1,
-          "column": 22
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": ")",
-      "range": [
-        22,
-        23
-      ],
-      "loc": {
-        "start": {
-          "line": 1,
-          "column": 22
-        },
-        "end": {
-          "line": 1,
-          "column": 23
+          "column": 11
         }
       }
     },
     {
       "type": "Keyword",
-      "value": "local",
+      "value": "static",
       "range": [
-        27,
-        32
+        15,
+        21
       ],
       "loc": {
         "start": {
@@ -830,97 +1153,25 @@
         },
         "end": {
           "line": 2,
-          "column": 7
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "user",
-      "range": [
-        33,
-        37
-      ],
-      "loc": {
-        "start": {
-          "line": 2,
           "column": 8
-        },
-        "end": {
-          "line": 2,
-          "column": 12
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": "=",
-      "range": [
-        38,
-        39
-      ],
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 13
-        },
-        "end": {
-          "line": 2,
-          "column": 14
         }
       }
     },
     {
       "type": "Keyword",
-      "value": "await",
+      "value": "async",
       "range": [
-        40,
-        45
+        22,
+        27
       ],
       "loc": {
         "start": {
           "line": 2,
-          "column": 15
+          "column": 9
         },
         "end": {
           "line": 2,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "User",
-      "range": [
-        46,
-        50
-      ],
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 21
-        },
-        "end": {
-          "line": 2,
-          "column": 25
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": ".",
-      "range": [
-        50,
-        51
-      ],
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 25
-        },
-        "end": {
-          "line": 2,
-          "column": 26
+          "column": 14
         }
       }
     },
@@ -928,17 +1179,17 @@
       "type": "Identifier",
       "value": "find",
       "range": [
-        51,
-        55
+        28,
+        32
       ],
       "loc": {
         "start": {
           "line": 2,
-          "column": 26
+          "column": 15
         },
         "end": {
           "line": 2,
-          "column": 30
+          "column": 19
         }
       }
     },
@@ -946,17 +1197,17 @@
       "type": "Punctuator",
       "value": "(",
       "range": [
-        55,
-        56
+        32,
+        33
       ],
       "loc": {
         "start": {
           "line": 2,
-          "column": 30
+          "column": 19
         },
         "end": {
           "line": 2,
-          "column": 31
+          "column": 20
         }
       }
     },
@@ -964,179 +1215,17 @@
       "type": "Identifier",
       "value": "id",
       "range": [
-        56,
-        58
+        33,
+        35
       ],
       "loc": {
         "start": {
           "line": 2,
-          "column": 31
-        },
-        "end": {
-          "line": 2,
-          "column": 33
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": ")",
-      "range": [
-        58,
-        59
-      ],
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 33
-        },
-        "end": {
-          "line": 2,
-          "column": 34
-        }
-      }
-    },
-    {
-      "type": "Keyword",
-      "value": "local",
-      "range": [
-        63,
-        68
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 2
-        },
-        "end": {
-          "line": 3,
-          "column": 7
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "onlineUsers",
-      "range": [
-        69,
-        80
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 8
-        },
-        "end": {
-          "line": 3,
-          "column": 19
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": "=",
-      "range": [
-        81,
-        82
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
           "column": 20
         },
         "end": {
-          "line": 3,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": "Keyword",
-      "value": "await",
-      "range": [
-        83,
-        88
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
+          "line": 2,
           "column": 22
-        },
-        "end": {
-          "line": 3,
-          "column": 27
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "User",
-      "range": [
-        89,
-        93
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 28
-        },
-        "end": {
-          "line": 3,
-          "column": 32
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": ".",
-      "range": [
-        93,
-        94
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 32
-        },
-        "end": {
-          "line": 3,
-          "column": 33
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "findOnlineUsers",
-      "range": [
-        94,
-        109
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 33
-        },
-        "end": {
-          "line": 3,
-          "column": 48
-        }
-      }
-    },
-    {
-      "type": "Punctuator",
-      "value": "(",
-      "range": [
-        109,
-        110
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 48
-        },
-        "end": {
-          "line": 3,
-          "column": 49
         }
       }
     },
@@ -1144,17 +1233,17 @@
       "type": "Punctuator",
       "value": ")",
       "range": [
-        110,
-        111
+        35,
+        36
       ],
       "loc": {
         "start": {
-          "line": 3,
-          "column": 49
+          "line": 2,
+          "column": 22
         },
         "end": {
-          "line": 3,
-          "column": 50
+          "line": 2,
+          "column": 23
         }
       }
     },
@@ -1162,70 +1251,106 @@
       "type": "Keyword",
       "value": "return",
       "range": [
-        117,
-        123
+        42,
+        48
       ],
       "loc": {
         "start": {
-          "line": 5,
-          "column": 2
+          "line": 3,
+          "column": 4
         },
         "end": {
-          "line": 5,
-          "column": 8
-        }
-      }
-    },
-    {
-      "type": "Identifier",
-      "value": "user",
-      "range": [
-        124,
-        128
-      ],
-      "loc": {
-        "start": {
-          "line": 5,
-          "column": 9
-        },
-        "end": {
-          "line": 5,
-          "column": 13
+          "line": 3,
+          "column": 10
         }
       }
     },
     {
       "type": "Punctuator",
-      "value": ",",
+      "value": "{",
       "range": [
-        128,
-        129
+        49,
+        50
       ],
       "loc": {
         "start": {
-          "line": 5,
-          "column": 13
+          "line": 3,
+          "column": 11
         },
         "end": {
-          "line": 5,
-          "column": 14
+          "line": 3,
+          "column": 12
         }
       }
     },
     {
       "type": "Identifier",
-      "value": "onlineUsers",
+      "value": "money",
       "range": [
-        130,
-        141
+        51,
+        56
       ],
       "loc": {
         "start": {
-          "line": 5,
-          "column": 15
+          "line": 3,
+          "column": 13
         },
         "end": {
-          "line": 5,
+          "line": 3,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "=",
+      "range": [
+        57,
+        58
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 19
+        },
+        "end": {
+          "line": 3,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "NumericLiteral",
+      "value": 500,
+      "range": [
+        59,
+        62
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 21
+        },
+        "end": {
+          "line": 3,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "}",
+      "range": [
+        63,
+        64
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 25
+        },
+        "end": {
+          "line": 3,
           "column": 26
         }
       }
@@ -1234,16 +1359,556 @@
       "type": "Keyword",
       "value": "end",
       "range": [
-        143,
-        146
+        93,
+        96
       ],
       "loc": {
         "start": {
-          "line": 6,
+          "line": 4,
+          "column": 2
+        },
+        "end": {
+          "line": 4,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Keyword",
+      "value": "end",
+      "range": [
+        98,
+        101
+      ],
+      "loc": {
+        "start": {
+          "line": 5,
           "column": 0
         },
         "end": {
-          "line": 6,
+          "line": 5,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Keyword",
+      "value": "async",
+      "range": [
+        105,
+        110
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Keyword",
+      "value": "function",
+      "range": [
+        111,
+        119
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 6
+        },
+        "end": {
+          "line": 7,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "hasMoney",
+      "range": [
+        120,
+        128
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 15
+        },
+        "end": {
+          "line": 7,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "(",
+      "range": [
+        128,
+        129
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 23
+        },
+        "end": {
+          "line": 7,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "sid64",
+      "range": [
+        129,
+        134
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 24
+        },
+        "end": {
+          "line": 7,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": ",",
+      "range": [
+        134,
+        135
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 29
+        },
+        "end": {
+          "line": 7,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "amt",
+      "range": [
+        136,
+        139
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 31
+        },
+        "end": {
+          "line": 7,
+          "column": 34
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": ")",
+      "range": [
+        139,
+        140
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 34
+        },
+        "end": {
+          "line": 7,
+          "column": 35
+        }
+      }
+    },
+    {
+      "type": "Keyword",
+      "value": "local",
+      "range": [
+        144,
+        149
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 2
+        },
+        "end": {
+          "line": 8,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "{",
+      "range": [
+        150,
+        151
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 8
+        },
+        "end": {
+          "line": 8,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "money",
+      "range": [
+        152,
+        157
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 10
+        },
+        "end": {
+          "line": 8,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "}",
+      "range": [
+        158,
+        159
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 16
+        },
+        "end": {
+          "line": 8,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "=",
+      "range": [
+        160,
+        161
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 18
+        },
+        "end": {
+          "line": 8,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": "Keyword",
+      "value": "await",
+      "range": [
+        162,
+        167
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 20
+        },
+        "end": {
+          "line": 8,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "Users",
+      "range": [
+        168,
+        173
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 26
+        },
+        "end": {
+          "line": 8,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": ".",
+      "range": [
+        173,
+        174
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 31
+        },
+        "end": {
+          "line": 8,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "find",
+      "range": [
+        174,
+        178
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 32
+        },
+        "end": {
+          "line": 8,
+          "column": 36
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "(",
+      "range": [
+        178,
+        179
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 36
+        },
+        "end": {
+          "line": 8,
+          "column": 37
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "sid64",
+      "range": [
+        179,
+        184
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 37
+        },
+        "end": {
+          "line": 8,
+          "column": 42
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": ")",
+      "range": [
+        184,
+        185
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 42
+        },
+        "end": {
+          "line": 8,
+          "column": 43
+        }
+      }
+    },
+    {
+      "type": "Keyword",
+      "value": "return",
+      "range": [
+        191,
+        197
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 2
+        },
+        "end": {
+          "line": 10,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "(",
+      "range": [
+        198,
+        199
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "line": 10,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "money",
+      "range": [
+        199,
+        204
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 10
+        },
+        "end": {
+          "line": 10,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": "||",
+      "range": [
+        205,
+        207
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 16
+        },
+        "end": {
+          "line": 10,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": "NumericLiteral",
+      "value": 0,
+      "range": [
+        208,
+        209
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 19
+        },
+        "end": {
+          "line": 10,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": ")",
+      "range": [
+        209,
+        210
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 20
+        },
+        "end": {
+          "line": 10,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": "Punctuator",
+      "value": ">",
+      "range": [
+        211,
+        212
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 22
+        },
+        "end": {
+          "line": 10,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": "Identifier",
+      "value": "amt",
+      "range": [
+        213,
+        216
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 24
+        },
+        "end": {
+          "line": 10,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Keyword",
+      "value": "end",
+      "range": [
+        218,
+        221
+      ],
+      "loc": {
+        "start": {
+          "line": 11,
+          "column": 0
+        },
+        "end": {
+          "line": 11,
           "column": 3
         }
       }
@@ -1252,17 +1917,17 @@
       "type": "EOF",
       "value": "<eof>",
       "range": [
-        146,
-        146
+        223,
+        223
       ],
       "loc": {
         "start": {
-          "line": 6,
-          "column": 3
+          "line": 12,
+          "column": 0
         },
         "end": {
-          "line": 6,
-          "column": 3
+          "line": 12,
+          "column": 0
         }
       }
     }
